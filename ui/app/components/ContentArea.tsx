@@ -8,6 +8,7 @@ import { Flex, Text, Button, Container } from '@dynatrace/strato-components';
 import { TopicContent } from '../types/content';
 import { AdminContentUploader } from './AdminContentUploader';
 import { RichMarkdownRenderer } from './RichMarkdownRenderer';
+import { MarkdownTheme } from '../styles/markdownThemes';
 
 interface ContentAreaProps {
   content: TopicContent | null;
@@ -23,74 +24,8 @@ interface ContentAreaProps {
   isAdmin?: boolean;
   currentTopicId: string | null;
   onContentRefresh: () => void;
+  theme?: MarkdownTheme;
 }
-
-interface CalloutProps {
-  type: 'info' | 'warning' | 'critical' | 'tip';
-  children: React.ReactNode;
-}
-
-const Callout: React.FC<CalloutProps> = ({ type, children }) => {
-  const styles = {
-    info: {
-      background: 'rgba(0, 161, 224, 0.1)',
-      border: '2px solid rgba(0, 161, 224, 0.5)',
-      icon: 'ℹ️',
-      title: 'INFORMATION'
-    },
-    warning: {
-      background: 'rgba(255, 200, 0, 0.1)',
-      border: '2px solid rgba(255, 200, 0, 0.5)',
-      icon: '⚠️',
-      title: 'WARNING'
-    },
-    critical: {
-      background: 'rgba(238, 61, 72, 0.1)',
-      border: '2px solid rgba(238, 61, 72, 0.5)',
-      icon: '🚨',
-      title: 'CRITICAL'
-    },
-    tip: {
-      background: 'rgba(50, 200, 50, 0.1)',
-      border: '2px solid rgba(50, 200, 50, 0.5)',
-      icon: '💡',
-      title: 'PRO TIP'
-    }
-  };
-
-  const style = styles[type];
-
-  return (
-    <div
-      style={{
-        padding: '16px 20px',
-        borderRadius: '8px',
-        margin: '24px 0',
-        background: style.background,
-        border: style.border,
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
-      }}
-    >
-      <Flex alignItems="center" gap={8} style={{ marginBottom: '8px' }}>
-        <Text style={{ fontSize: '16px' }}>{style.icon}</Text>
-        <Text
-          style={{
-            fontSize: '12px',
-            fontWeight: 600,
-            color: '#f0f0f5',
-            textTransform: 'uppercase',
-            letterSpacing: '1px'
-          }}
-        >
-          {style.title}
-        </Text>
-      </Flex>
-      <div style={{ color: '#b4b4be', fontSize: '14px', lineHeight: 1.6 }}>
-        {children}
-      </div>
-    </div>
-  );
-};
 
 export const ContentArea: React.FC<ContentAreaProps> = ({
   content,
@@ -105,10 +40,39 @@ export const ContentArea: React.FC<ContentAreaProps> = ({
   onNoteChange,
   isAdmin = false,
   currentTopicId,
-  onContentRefresh
+  onContentRefresh,
+  theme
 }) => {
   const [showNoteEditor, setShowNoteEditor] = useState(false);
   const [noteText, setNoteText] = useState(userNote);
+
+  // Check if content starts with a markdown heading
+  const contentHasHeading = (contentText: string): boolean => {
+    if (!contentText) return false;
+    const trimmed = contentText.trim();
+    return /^#{1,6}\s/.test(trimmed);
+  };
+
+  const shouldShowTopicTitle = content && !contentHasHeading(content.content);
+
+  const handleDownloadMarkdown = () => {
+    if (!content || !currentTopicId) return;
+
+    // Create a Blob from the markdown content
+    const blob = new Blob([content.content], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+
+    // Create a temporary link and trigger download
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${currentTopicId}.md`;
+    document.body.appendChild(link);
+    link.click();
+
+    // Cleanup
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   if (isLoading) {
     return (
@@ -213,94 +177,71 @@ export const ContentArea: React.FC<ContentAreaProps> = ({
       >
         {/* Admin Content Uploader - show even when no content exists */}
         {isAdmin && currentTopicId && (
-          <AdminContentUploader
-            topicId={currentTopicId}
-            topicTitle={content?.title || currentTopicId}
-            onContentUpdated={onContentRefresh}
-          />
+          <>
+            <AdminContentUploader
+              topicId={currentTopicId}
+              topicTitle={content?.title || currentTopicId}
+              onContentUpdated={onContentRefresh}
+            />
+            {/* Download Markdown Button */}
+            {content && (
+              <button
+                onClick={handleDownloadMarkdown}
+                title="Download markdown (Admin)"
+                style={{
+                  position: 'absolute',
+                  top: '56px',
+                  right: '16px',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  background: 'rgba(50, 200, 50, 0.9)',
+                  border: '2px solid #32c832',
+                  color: '#ffffff',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  transition: 'all 0.2s ease',
+                  zIndex: 100
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.background = 'rgba(50, 200, 50, 1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.background = 'rgba(50, 200, 50, 0.9)';
+                }}
+              >
+                ⬇
+              </button>
+            )}
+          </>
         )}
 
-        {/* Title with duration */}
-        <Flex justifyContent="space-between" alignItems="center" style={{ marginBottom: '24px' }}>
-          <Text
+        {/* Smart Topic Title - only show if content doesn't have a heading */}
+        {shouldShowTopicTitle && (
+          <h1
             style={{
-              fontSize: '32px',
-              fontWeight: 600,
-              color: '#ffffff',
-              lineHeight: 1.2
+              fontSize: theme?.styles.h1Size || '32px',
+              fontWeight: (theme?.styles.h1Weight || '600') as any,
+              color: theme?.styles.h1Color || '#ffffff',
+              background: theme?.styles.h1Background || 'transparent',
+              padding: theme?.styles.h1Padding || '0',
+              borderRadius: theme?.styles.h1BorderRadius || '0',
+              marginBottom: theme?.styles.h1MarginBottom || '24px',
+              marginTop: 0
             }}
           >
             {content.title}
-          </Text>
-          <Text
-            style={{
-              fontSize: '12px',
-              color: 'rgba(180, 180, 190, 0.7)',
-              background: 'rgba(108, 93, 211, 0.15)',
-              padding: '6px 12px',
-              borderRadius: '12px'
-            }}
-          >
-            ⏱️ Est. {content.metadata.duration} min
-          </Text>
-        </Flex>
+          </h1>
+        )}
 
         {/* Content Rendering */}
-        <RichMarkdownRenderer content={content.content} />
-
-        {/* Example Callouts (would be parsed from content in production) */}
-        <Callout type="info">
-          <Text>
-            This is an example informational callout. In production, these would be parsed from
-            markdown content using a custom renderer.
-          </Text>
-        </Callout>
-
-        {/* Related Topics */}
-        {content.metadata.relatedTopics.length > 0 && (
-          <Container
-            style={{
-              marginTop: '48px',
-              padding: '24px',
-              background: 'rgba(45, 48, 73, 0.6)',
-              borderRadius: '8px',
-              border: '1px solid rgba(108, 93, 211, 0.2)'
-            }}
-          >
-            <Text
-              style={{
-                fontSize: '14px',
-                fontWeight: 600,
-                color: '#f0f0f5',
-                marginBottom: '12px'
-              }}
-            >
-              🔗 Related Topics
-            </Text>
-            <Flex gap={8} flexWrap="wrap">
-              {content.metadata.relatedTopics.map((topic, i) => (
-                <div
-                  key={i}
-                  style={{
-                    padding: '8px 16px',
-                    background: 'rgba(108, 93, 211, 0.15)',
-                    borderRadius: '16px',
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(108, 93, 211, 0.25)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(108, 93, 211, 0.15)';
-                  }}
-                >
-                  <Text style={{ fontSize: '13px', color: '#d8b9ff' }}>{topic}</Text>
-                </div>
-              ))}
-            </Flex>
-          </Container>
-        )}
+        <RichMarkdownRenderer content={content.content} theme={theme} />
       </div>
 
       {/* Actions Bar */}

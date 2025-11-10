@@ -117,7 +117,7 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = ({ onAuthenticated 
         </Flex>
 
         {/* Password Form */}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <Flex flexDirection="column" gap={16}>
             <Text
               style={{
@@ -132,11 +132,16 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = ({ onAuthenticated 
 
             <input
               id="password-input"
-              type="password"
+              type="text"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               autoFocus
+              autoComplete="off"
+              name="presentation-access-code"
+              data-1p-ignore="true"
+              data-lpignore="true"
+              data-form-type="other"
               style={{
                 width: '100%',
                 height: '48px',
@@ -146,8 +151,9 @@ export const PasswordScreen: React.FC<PasswordScreenProps> = ({ onAuthenticated 
                 border: error ? '2px solid #ee3d48' : '1px solid rgba(108, 93, 211, 0.3)',
                 borderRadius: '8px',
                 color: '#f0f0f5',
-                padding: '0 16px'
-              }}
+                padding: '0 16px',
+                WebkitTextSecurity: 'disc'
+              } as React.CSSProperties}
             />
 
             {error && (

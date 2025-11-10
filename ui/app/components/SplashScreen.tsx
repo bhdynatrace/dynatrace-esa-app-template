@@ -183,7 +183,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
             transition: 'opacity 1s ease-in-out'
           }}
         >
-          No code was manually harmed or edited during the making of this presentation, thank you Claude.
+          No code was manually harmed or manually edited during the making of this presentation, thank you Claude.
         </Text>
       )}
     </Flex>

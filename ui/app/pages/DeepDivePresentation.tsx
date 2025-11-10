@@ -11,7 +11,11 @@ import { ContentArea } from '../components/ContentArea';
 import { MODULES } from '../data/modules';
 import { TOPICS_DATA } from '../data/topics';
 import { CONTENT_DATA } from '../data/content';
+import { PLACEHOLDER_CONTENT } from '../data/placeholderContent';
 import { fetchTopicContent } from '../services/logContentService';
+import { MARKDOWN_THEMES, ThemeId } from '../styles/markdownThemes';
+import { ThemeSelector } from '../components/ThemeSelector';
+import { getGlobalTheme, setGlobalTheme } from '../services/themeSettingsService';
 import {
   ModuleId,
   UserProgress,
@@ -34,6 +38,29 @@ const DeepDivePresentation: React.FC<DeepDivePresentationProps> = ({ isAdmin = f
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState<ThemeId>('classic');
+
+  // Load global theme from app-settings (applies to all users)
+  useEffect(() => {
+    const loadGlobalTheme = async () => {
+      const globalTheme = await getGlobalTheme();
+      setCurrentTheme(globalTheme);
+    };
+    loadGlobalTheme();
+  }, []);
+
+  // Save global theme to app-settings (admin only)
+  const handleThemeChange = async (themeId: ThemeId) => {
+    setCurrentTheme(themeId);
+    if (isAdmin) {
+      const success = await setGlobalTheme(themeId, 'admin');
+      if (success) {
+        console.log(`[DeepDivePresentation] Global theme updated to: ${themeId}`);
+      } else {
+        console.error('[DeepDivePresentation] Failed to save global theme');
+      }
+    }
+  };
 
   // Load user progress from localStorage
   useEffect(() => {
@@ -121,7 +148,28 @@ const DeepDivePresentation: React.FC<DeepDivePresentationProps> = ({ isAdmin = f
           if (localContent) {
             setCurrentContent(localContent);
           } else {
-            setCurrentContent(null);
+            // Final fallback: use placeholder content
+            const placeholderMarkdown = PLACEHOLDER_CONTENT[currentTopic];
+            if (placeholderMarkdown) {
+              // Get topic metadata from TOPICS_DATA to build proper TopicContent
+              const topicMeta = Object.values(TOPICS_DATA)
+                .flat()
+                .find(t => t.id === currentTopic);
+
+              setCurrentContent({
+                id: currentTopic,
+                title: topicMeta?.title || currentTopic,
+                type: 'markdown',
+                content: placeholderMarkdown,
+                metadata: {
+                  duration: topicMeta?.duration || 5,
+                  tags: topicMeta?.tags || [],
+                  relatedTopics: topicMeta?.relatedTopics || []
+                }
+              });
+            } else {
+              setCurrentContent(null);
+            }
           }
         }
       } catch (error) {
@@ -131,7 +179,27 @@ const DeepDivePresentation: React.FC<DeepDivePresentationProps> = ({ isAdmin = f
         if (fallbackContent) {
           setCurrentContent(fallbackContent);
         } else {
-          setCurrentContent(null);
+          // Final fallback: use placeholder content
+          const placeholderMarkdown = PLACEHOLDER_CONTENT[currentTopic];
+          if (placeholderMarkdown) {
+            const topicMeta = Object.values(TOPICS_DATA)
+              .flat()
+              .find(t => t.id === currentTopic);
+
+            setCurrentContent({
+              id: currentTopic,
+              title: topicMeta?.title || currentTopic,
+              type: 'markdown',
+              content: placeholderMarkdown,
+              metadata: {
+                duration: topicMeta?.duration || 5,
+                tags: topicMeta?.tags || [],
+                relatedTopics: topicMeta?.relatedTopics || []
+              }
+            });
+          } else {
+            setCurrentContent(null);
+          }
         }
       } finally {
         setIsLoading(false);
@@ -318,8 +386,15 @@ const DeepDivePresentation: React.FC<DeepDivePresentationProps> = ({ isAdmin = f
         <Flex
           flexDirection="column"
           alignItems="flex-end"
-          gap={4}
+          gap={8}
         >
+          {/* Theme Selector - Admin Only */}
+          {isAdmin && (
+            <ThemeSelector
+              currentTheme={currentTheme}
+              onThemeChange={handleThemeChange}
+            />
+          )}
           <Text
             style={{
               fontSize: '12px',
@@ -382,6 +457,7 @@ const DeepDivePresentation: React.FC<DeepDivePresentationProps> = ({ isAdmin = f
           isAdmin={isAdmin}
           currentTopicId={currentTopic}
           onContentRefresh={handleContentRefresh}
+          theme={MARKDOWN_THEMES[currentTheme]}
         />
       </Flex>
     </Flex>

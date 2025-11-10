@@ -31,6 +31,9 @@ export async function fetchTopicContent(topicId: string): Promise<string | null>
       | limit 1
       | fields content, timestamp`;
 
+    console.log(`[LogContentService] Fetching content for topic: ${topicId}`);
+    console.log(`[LogContentService] Query: ${query}`);
+
     const response = await queryExecutionClient.queryExecute({
       body: {
         query,
@@ -40,18 +43,28 @@ export async function fetchTopicContent(topicId: string): Promise<string | null>
       }
     });
 
+    console.log(`[LogContentService] Response:`, response);
+    console.log(`[LogContentService] Response.result:`, response.result);
+    console.log(`[LogContentService] Response.result.records:`, response.result?.records);
+    console.log(`[LogContentService] Records length:`, response.result?.records?.length);
+
     // Extract content from first (and only) record
     if (response.result?.records && response.result.records.length > 0) {
       const record = response.result.records[0];
+      console.log(`[LogContentService] Found record:`, record);
+      console.log(`[LogContentService] Record keys:`, Object.keys(record || {}));
+      console.log(`[LogContentService] Record.content type:`, typeof record?.content);
       if (record && typeof record.content === 'string') {
+        console.log(`[LogContentService] Returning content (${record.content.length} chars)`);
         return record.content;
       }
     }
 
+    console.log(`[LogContentService] No content found for topic ${topicId}`);
     return null;
   } catch (error) {
-    // Silently return null on any error (graceful degradation to local content)
-    console.debug(`No log content available for topic ${topicId}`, error);
+    // Log error for debugging
+    console.error(`[LogContentService] Error fetching topic ${topicId}:`, error);
     return null;
   }
 }

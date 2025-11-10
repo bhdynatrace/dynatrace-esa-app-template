@@ -16,10 +16,12 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import mermaid from 'mermaid';
 import { Graph, registerCoreCodecs, xmlUtils } from '@maxgraph/core';
+import { MarkdownTheme } from '../styles/markdownThemes';
 
 interface RichMarkdownRendererProps {
   content: string;
   className?: string;
+  theme?: MarkdownTheme;
 }
 
 // Draw.io Diagram Component using maxGraph
@@ -305,13 +307,56 @@ const MermaidDiagram: React.FC<{ chart: string }> = ({ chart }) => {
 
 export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
   content,
-  className = ''
+  className = '',
+  theme
 }) => {
   const [modalImage, setModalImage] = React.useState<string | null>(null);
 
+  // Build theme styles object
+  const themeStyles = theme ? {
+    '--theme-h1-size': theme.styles.h1Size,
+    '--theme-h1-weight': theme.styles.h1Weight,
+    '--theme-h1-color': theme.styles.h1Color,
+    '--theme-h1-background': theme.styles.h1Background,
+    '--theme-h1-padding': theme.styles.h1Padding,
+    '--theme-h1-border-radius': theme.styles.h1BorderRadius,
+    '--theme-h1-margin-bottom': theme.styles.h1MarginBottom,
+    '--theme-h2-size': theme.styles.h2Size,
+    '--theme-h2-weight': theme.styles.h2Weight,
+    '--theme-h2-color': theme.styles.h2Color,
+    '--theme-h2-border-bottom': theme.styles.h2BorderBottom,
+    '--theme-h2-padding-bottom': theme.styles.h2PaddingBottom,
+    '--theme-h2-margin-bottom': theme.styles.h2MarginBottom,
+    '--theme-h3-size': theme.styles.h3Size,
+    '--theme-h3-weight': theme.styles.h3Weight,
+    '--theme-h3-color': theme.styles.h3Color,
+    '--theme-h3-margin-bottom': theme.styles.h3MarginBottom,
+    '--theme-paragraph-size': theme.styles.paragraphSize,
+    '--theme-paragraph-line-height': theme.styles.paragraphLineHeight,
+    '--theme-paragraph-margin-bottom': theme.styles.paragraphMarginBottom,
+    '--theme-code-background': theme.styles.codeBackground,
+    '--theme-code-border': theme.styles.codeBorder,
+    '--theme-code-padding': theme.styles.codePadding,
+    '--theme-code-border-radius': theme.styles.codeBorderRadius,
+    '--theme-code-block-padding': theme.styles.codeBlockPadding,
+    '--theme-list-margin-left': theme.styles.listMarginLeft,
+    '--theme-list-item-margin-bottom': theme.styles.listItemMarginBottom,
+    '--theme-blockquote-background': theme.styles.blockquoteBackground,
+    '--theme-blockquote-border-left': theme.styles.blockquoteBorderLeft,
+    '--theme-blockquote-padding': theme.styles.blockquotePadding,
+    '--theme-link-color': theme.styles.linkColor,
+    '--theme-link-hover-color': theme.styles.linkHoverColor,
+    '--theme-table-border': theme.styles.tableBorder,
+    '--theme-table-header-background': theme.styles.tableHeaderBackground,
+    '--theme-table-row-hover-background': theme.styles.tableRowHoverBackground
+  } as React.CSSProperties : {};
+
   return (
     <>
-      <div className={`rich-markdown-content ${className}`}>
+      <div
+        className={`rich-markdown-content ${className}`}
+        style={themeStyles}
+      >
         <ReactMarkdown
         remarkPlugins={[
           remarkGfm      // Tables, task lists, strikethrough, footnotes
@@ -326,6 +371,7 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
                   width: '100%',
                   borderCollapse: 'collapse',
                   backgroundColor: 'rgba(45, 48, 73, 0.6)',
+                  border: 'var(--theme-table-border, 1px solid rgba(108, 93, 211, 0.3))',
                   borderRadius: '4px'
                 }}
                 {...props}
@@ -335,7 +381,7 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
           thead: ({ node, ...props }) => (
             <thead
               style={{
-                backgroundColor: 'rgba(108, 93, 211, 0.2)',
+                background: 'var(--theme-table-header-background, rgba(108, 93, 211, 0.2))',
                 borderBottom: '2px solid rgba(108, 93, 211, 0.5)'
               }}
               {...props}
@@ -348,7 +394,7 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
                 textAlign: 'left',
                 fontWeight: 600,
                 color: '#f0f0f5',
-                borderBottom: '1px solid rgba(108, 93, 211, 0.3)'
+                border: 'var(--theme-table-border, 1px solid rgba(108, 93, 211, 0.3))'
               }}
               {...props}
             />
@@ -357,7 +403,7 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
             <td
               style={{
                 padding: '12px 16px',
-                borderBottom: '1px solid rgba(108, 93, 211, 0.2)',
+                border: 'var(--theme-table-border, 1px solid rgba(108, 93, 211, 0.3))',
                 color: '#f0f0f5'
               }}
               {...props}
@@ -369,7 +415,7 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
                 transition: 'background-color 0.2s ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(108, 93, 211, 0.1)';
+                e.currentTarget.style.backgroundColor = getComputedStyle(e.currentTarget).getPropertyValue('--theme-table-row-hover-background') || 'rgba(108, 93, 211, 0.1)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'transparent';
@@ -386,9 +432,10 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
               return (
                 <code
                   style={{
-                    backgroundColor: 'rgba(108, 93, 211, 0.2)',
-                    padding: '2px 6px',
-                    borderRadius: '3px',
+                    background: 'var(--theme-code-background, rgba(108, 93, 211, 0.2))',
+                    border: 'var(--theme-code-border, 1px solid rgba(108, 93, 211, 0.3))',
+                    padding: 'var(--theme-code-padding, 2px 6px)',
+                    borderRadius: 'var(--theme-code-border-radius, 3px)',
                     fontSize: '0.9em',
                     fontFamily: 'monospace',
                     color: '#7dc579'
@@ -429,12 +476,12 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
           pre: ({ node, ...props }) => (
             <pre
               style={{
-                backgroundColor: 'rgba(27, 28, 46, 0.8)',
-                padding: '16px',
-                borderRadius: '8px',
+                background: 'var(--theme-code-background, rgba(27, 28, 46, 0.8))',
+                padding: 'var(--theme-code-block-padding, 16px)',
+                borderRadius: 'var(--theme-code-border-radius, 8px)',
+                border: 'var(--theme-code-border, 1px solid rgba(108, 93, 211, 0.3))',
                 overflow: 'auto',
                 marginBottom: '16px',
-                border: '1px solid rgba(108, 93, 211, 0.3)',
                 fontSize: '0.9em',
                 lineHeight: '1.5'
               }}
@@ -444,13 +491,14 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
           h1: ({ node, ...props }) => (
             <h1
               style={{
-                fontSize: '2em',
-                fontWeight: 700,
-                marginTop: '24px',
-                marginBottom: '16px',
-                color: '#f0f0f5',
-                borderBottom: '2px solid rgba(108, 93, 211, 0.5)',
-                paddingBottom: '8px'
+                fontSize: 'var(--theme-h1-size, 2em)',
+                fontWeight: 'var(--theme-h1-weight, 700)' as any,
+                color: 'var(--theme-h1-color, #f0f0f5)',
+                background: 'var(--theme-h1-background, transparent)',
+                padding: 'var(--theme-h1-padding, 0)',
+                borderRadius: 'var(--theme-h1-border-radius, 0)',
+                marginBottom: 'var(--theme-h1-margin-bottom, 16px)',
+                marginTop: '24px'
               }}
               {...props}
             />
@@ -458,11 +506,13 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
           h2: ({ node, ...props }) => (
             <h2
               style={{
-                fontSize: '1.5em',
-                fontWeight: 600,
-                marginTop: '20px',
-                marginBottom: '12px',
-                color: '#f0f0f5'
+                fontSize: 'var(--theme-h2-size, 1.5em)',
+                fontWeight: 'var(--theme-h2-weight, 600)' as any,
+                color: 'var(--theme-h2-color, #f0f0f5)',
+                borderBottom: 'var(--theme-h2-border-bottom, none)',
+                paddingBottom: 'var(--theme-h2-padding-bottom, 0)',
+                marginBottom: 'var(--theme-h2-margin-bottom, 12px)',
+                marginTop: '20px'
               }}
               {...props}
             />
@@ -470,11 +520,11 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
           h3: ({ node, ...props }) => (
             <h3
               style={{
-                fontSize: '1.25em',
-                fontWeight: 600,
-                marginTop: '16px',
-                marginBottom: '10px',
-                color: '#f0f0f5'
+                fontSize: 'var(--theme-h3-size, 1.25em)',
+                fontWeight: 'var(--theme-h3-weight, 600)' as any,
+                color: 'var(--theme-h3-color, #f0f0f5)',
+                marginBottom: 'var(--theme-h3-margin-bottom, 10px)',
+                marginTop: '16px'
               }}
               {...props}
             />
@@ -494,8 +544,9 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
           p: ({ node, ...props }) => (
             <p
               style={{
-                marginBottom: '12px',
-                lineHeight: '1.6',
+                fontSize: 'var(--theme-paragraph-size, 16px)',
+                lineHeight: 'var(--theme-paragraph-line-height, 1.6)',
+                marginBottom: 'var(--theme-paragraph-margin-bottom, 12px)',
                 color: '#f0f0f5'
               }}
               {...props}
@@ -505,7 +556,8 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
             <ul
               style={{
                 marginBottom: '12px',
-                paddingLeft: '24px',
+                marginLeft: 'var(--theme-list-margin-left, 24px)',
+                paddingLeft: 0,
                 color: '#f0f0f5'
               }}
               {...props}
@@ -515,7 +567,8 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
             <ol
               style={{
                 marginBottom: '12px',
-                paddingLeft: '24px',
+                marginLeft: 'var(--theme-list-margin-left, 24px)',
+                paddingLeft: 0,
                 color: '#f0f0f5'
               }}
               {...props}
@@ -524,7 +577,7 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
           li: ({ node, ...props }) => (
             <li
               style={{
-                marginBottom: '6px',
+                marginBottom: 'var(--theme-list-item-margin-bottom, 6px)',
                 lineHeight: '1.6'
               }}
               {...props}
@@ -533,14 +586,13 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
           blockquote: ({ node, ...props }) => (
             <blockquote
               style={{
-                borderLeft: '4px solid rgba(108, 93, 211, 0.8)',
-                paddingLeft: '16px',
+                background: 'var(--theme-blockquote-background, rgba(108, 93, 211, 0.1))',
+                borderLeft: 'var(--theme-blockquote-border-left, 4px solid rgba(108, 93, 211, 0.8))',
+                padding: 'var(--theme-blockquote-padding, 12px 16px)',
                 marginLeft: '0',
                 marginBottom: '16px',
                 fontStyle: 'italic',
                 color: '#b4b4be',
-                backgroundColor: 'rgba(108, 93, 211, 0.1)',
-                padding: '12px 16px',
                 borderRadius: '4px'
               }}
               {...props}
@@ -551,17 +603,17 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                color: '#6c5dd3',
+                color: 'var(--theme-link-color, #6c5dd3)',
                 textDecoration: 'none',
                 borderBottom: '1px solid rgba(108, 93, 211, 0.5)',
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#8b7deb';
+                e.currentTarget.style.color = getComputedStyle(e.currentTarget).getPropertyValue('--theme-link-hover-color') || '#8b7deb';
                 e.currentTarget.style.borderBottomColor = 'rgba(139, 125, 235, 0.8)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = '#6c5dd3';
+                e.currentTarget.style.color = getComputedStyle(e.currentTarget).getPropertyValue('--theme-link-color') || '#6c5dd3';
                 e.currentTarget.style.borderBottomColor = 'rgba(108, 93, 211, 0.5)';
               }}
               {...props}

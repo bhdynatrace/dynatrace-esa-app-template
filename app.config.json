@@ -3,7 +3,7 @@
   "app": {
   "id": "my.d1esa.dynatrace.deepdive",
     "name": "D1 Leadership AI Deep Dive",
-  "version": "1.9.5",
+  "version": "2.1.1",
     "description": "D1 - AI Deep Dive Presentation App",
     "scopes": [
       {
