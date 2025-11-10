@@ -4,7 +4,7 @@ import { DataTableV2, DQLEditor } from '@dynatrace/strato-components-preview';
 import { queryExecutionClient } from '@dynatrace-sdk/client-grail';
 
 /**
- * Dashboard - Template App
+ * Dashboard - Deep Dive Presents (D1-ESA)
  * A starter template for building Dynatrace Gen3 applications
  * Features:
  * - DQL Editor for querying Grail data
@@ -83,14 +83,27 @@ const Dashboard: React.FC = () => {
   return (
     <Flex flexDirection="column" gap={24} padding={24}>
       <Flex justifyContent="space-between" alignItems="center">
-        <Heading level={1}>Template App</Heading>
-        <Text style={{
-          fontSize: '12px',
-          color: 'var(--dt-colors-text-neutral-default, #b4b4be)',
-          fontStyle: 'italic'
-        }}>
-          App by Dynatrace One - ESA OSS
-        </Text>
+        <Heading level={1}>Deep Dive Presents (D1-ESA)</Heading>
+        <Flex
+          flexDirection="column"
+          alignItems="flex-end"
+          gap={4}
+        >
+          <Text style={{
+            fontSize: '12px',
+            color: 'var(--dt-colors-text-neutral-default, #b4b4be)',
+            fontStyle: 'italic'
+          }}>
+            App by Dynatrace One - ESA OSS
+          </Text>
+          <Text style={{
+            fontSize: '11px',
+            color: 'var(--dt-colors-text-neutral-default, #b4b4be)',
+            fontStyle: 'italic'
+          }}>
+            by Brett Hofer
+          </Text>
+        </Flex>
       </Flex>
 
       {/* Information Section */}

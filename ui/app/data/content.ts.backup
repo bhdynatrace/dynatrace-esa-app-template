@@ -1,0 +1,1299 @@
+/**
+ * Content Data
+ * Topic content for the presentation
+ */
+
+import { TopicContent } from '../types/content';
+
+export const CONTENT_DATA: Record<string, TopicContent> = {
+  'managed-offline': {
+    id: 'managed-offline',
+    title: 'Dynatrace Managed Offline',
+    type: 'markdown',
+    content: `Dynatrace Managed Offline is an architecture designed for air-gapped environments where no external connectivity is available.
+
+## Key Characteristics
+
+**Air-Gapped Deployment**: Complete isolation from external networks for security-sensitive environments
+
+**Update Management**: Manual update processes requiring careful planning and coordination
+
+**Certificate Handling**: Self-signed certificates or internal PKI infrastructure required
+
+## Architecture Components
+
+- **Dynatrace Server**: Mission Control for the entire environment
+- **ActiveGates**: Communication bridges operating in offline mode
+- **OneAgents**: Monitoring agents deployed on hosts and applications
+- **Cluster Nodes**: High-availability configuration across multiple nodes
+
+## Deployment Considerations
+
+Manual update packages must be transferred via secure channels. Organizations typically deploy this architecture in:
+
+- Government facilities
+- Financial institutions with strict compliance requirements
+- Manufacturing environments with operational technology (OT) networks
+- Healthcare systems handling sensitive patient data
+
+## Support Challenges
+
+Service teams face unique challenges supporting offline deployments:
+
+- **Remote diagnostics**: Limited ability to access systems directly
+- **Update coordination**: Complex change management processes
+- **Version drift**: Customers may fall behind on critical updates
+- **Knowledge gaps**: Specialized expertise required for air-gapped architectures`,
+    metadata: {
+      duration: 5,
+      tags: ['Architectures', 'Managed Offline'],
+      relatedTopics: ['Managed + PHA', 'SaaS Classic']
+    }
+  },
+
+  'managed-pha': {
+    id: 'managed-pha',
+    title: 'Dynatrace Managed + PHA',
+    type: 'markdown',
+    content: `Dynatrace Managed with Private High Availability (PHA) extends the Managed architecture with enhanced resilience and performance.
+
+## PHA Architecture
+
+**High Availability**: Multi-node clusters with automatic failover
+
+**Geographic Distribution**: Deployment across multiple data centers for disaster recovery
+
+**Load Balancing**: Intelligent traffic distribution across cluster nodes
+
+## Key Benefits
+
+- **99.9% uptime** guarantee through redundancy
+- **Zero-downtime upgrades** via rolling update strategy
+- **Data locality** compliance for regional regulations
+- **Performance optimization** through distributed processing
+
+## Implementation Requirements
+
+Organizations implementing PHA must consider:
+
+- **Infrastructure costs**: Multiple server nodes and storage systems
+- **Network bandwidth**: High-speed connectivity between cluster nodes
+- **Operational expertise**: Advanced monitoring and management skills
+- **Disaster recovery**: Geographic redundancy and backup strategies
+
+## Service Implications
+
+PHA deployments require specialized service capabilities:
+
+- **Cluster health monitoring**: Proactive detection of node failures
+- **Performance tuning**: Optimization across distributed architecture
+- **Upgrade orchestration**: Coordinated updates across all nodes
+- **Capacity planning**: Scalability assessments and recommendations`,
+    metadata: {
+      duration: 5,
+      tags: ['Architectures', 'Managed', 'PHA'],
+      relatedTopics: ['Managed Offline', 'SaaS Gen3']
+    }
+  },
+
+  'saas-classic': {
+    id: 'saas-classic',
+    title: 'Dynatrace SaaS Classic',
+    type: 'markdown',
+    content: `Dynatrace SaaS Classic represents the original multi-tenant SaaS offering, serving thousands of customers globally.
+
+## Classic Architecture
+
+**Multi-Tenant**: Shared infrastructure with logical isolation between tenants
+
+**Monolithic Backend**: Traditional server-based architecture
+
+**Fixed Retention**: Standard data retention policies (typically 35 days)
+
+## Migration Challenges
+
+Customers on SaaS Classic face migration decisions:
+
+- **Gen3 Migration**: Transitioning to next-generation platform
+- **Feature gaps**: Some Classic features not yet in Gen3
+- **Data transfer**: Historical data migration complexities
+- **Process changes**: Differences in query language and workflows
+
+## Service Considerations
+
+Supporting Classic customers requires:
+
+- **Legacy expertise**: Deep knowledge of older platform versions
+- **Migration planning**: Strategic roadmaps for Gen3 transition
+- **Feature parity**: Tracking and communicating capability differences
+- **Dual support**: Maintaining expertise in both platforms`,
+    metadata: {
+      duration: 5,
+      tags: ['Architectures', 'SaaS', 'Classic'],
+      relatedTopics: ['SaaS Gen3', 'Managed Offline']
+    }
+  },
+
+  'saas-gen3': {
+    id: 'saas-gen3',
+    title: 'Dynatrace SaaS Gen3',
+    type: 'markdown',
+    content: `Dynatrace SaaS Gen3 represents the future of the platform, built on Grail for unlimited scalability and advanced analytics.
+
+## Gen3 Innovations
+
+**Grail Platform**: Unified data lakehouse for all observability data
+
+**DQL**: Powerful Dynatrace Query Language for advanced analytics
+
+**Unlimited Retention**: Store data as long as needed without arbitrary limits
+
+**AutomationEngine**: Workflow automation and orchestration capabilities
+
+## Key Capabilities
+
+- **Unified Analytics**: Query across logs, metrics, traces, and events
+- **Cost Efficiency**: Pay only for what you ingest and store
+- **Advanced AI**: Davis AI enhanced with Grail's analytical power
+- **Custom Applications**: Build apps on the platform using ESA
+
+## Migration Benefits
+
+Organizations moving to Gen3 gain:
+
+- **Flexibility**: Retain data for compliance and historical analysis
+- **Performance**: Lightning-fast queries across massive datasets
+- **Innovation**: Access to latest features and capabilities
+- **Future-proof**: Platform designed for next decade of observability
+
+## Support Evolution
+
+Gen3 requires new service capabilities:
+
+- **DQL expertise**: Teaching customers advanced query techniques
+- **App development**: Supporting custom app creation
+- **Migration assistance**: Guiding transition from Classic
+- **Best practices**: Establishing patterns for Gen3 usage`,
+    metadata: {
+      duration: 5,
+      tags: ['Architectures', 'SaaS', 'Gen3'],
+      relatedTopics: ['SaaS Classic', 'Managed + PHA']
+    }
+  },
+
+  'challenges-overview': {
+    id: 'challenges-overview',
+    title: 'Service Challenges Overview',
+    type: 'markdown',
+    content: `Our service and support teams face unprecedented challenges as Dynatrace grows in scale and complexity.
+
+## Major Challenge Categories
+
+### Solution Architect Challenges
+- **Complexity overload**: Managing increasingly complex customer environments
+- **Skill gaps**: Rapid platform evolution outpaces training
+- **Bandwidth constraints**: Too many customers, not enough experts
+- **Competitive pressure**: Rivals offering simpler solutions
+
+### Services Consultant Challenges
+- **Migration complexity**: Moving from legacy platforms requires deep expertise
+- **Time pressure**: Customer expectations for rapid deployment
+- **Knowledge transfer**: Ensuring customers can self-manage post-engagement
+- **Quality vs. Speed**: Balancing thorough implementation with delivery timelines
+
+### Account Team Challenges
+- **Visibility gaps**: Lack of real-time insight into customer health
+- **Coordination issues**: Disconnected teams and information silos
+- **Escalation fatigue**: Reactive firefighting instead of proactive management
+- **Resource allocation**: Difficulty prioritizing limited service capacity
+
+## The Pattern of Failures
+
+Common threads emerge across our case studies:
+
+**Underestimation**: Complexity of customer requirements not fully understood upfront
+
+**Communication gaps**: Critical information not reaching the right people at the right time
+
+**Resource constraints**: Insufficient specialized expertise allocated to challenging engagements
+
+**Process failures**: Ad-hoc approaches instead of repeatable, proven methodologies`,
+    metadata: {
+      duration: 3,
+      tags: ['Challenges', 'Overview'],
+      relatedTopics: ['Accenture', 'Shell']
+    }
+  },
+
+  'accenture': {
+    id: 'accenture',
+    title: 'Case Study: Accenture vs DataDog',
+    type: 'case-study',
+    content: `**CASE STUDY: Competitive Loss to DataDog**
+
+## Background
+
+Accenture, a global professional services giant, evaluated observability platforms for their worldwide operations. Annual recurring revenue at stake: **$2.5M**.
+
+## The Challenge
+
+Accenture's requirements:
+- Global deployment across 50+ countries
+- High-volume log management (100TB+ daily)
+- Integration with existing ServiceNow workflows
+- Cost-effective pricing for their massive scale
+
+## What Went Wrong
+
+### Pricing Model Mismatch
+Our standard pricing structure didn't align with Accenture's high-volume, cost-sensitive requirements. DataDog offered more flexible consumption-based pricing.
+
+### Log Management Perception
+Accenture's evaluation team perceived DataDog's log management as simpler and more intuitive, despite Dynatrace's superior APM capabilities.
+
+### Limited SE Bandwidth
+We couldn't allocate dedicated Solutions Engineering resources early enough in the sales cycle. By the time we engaged deeply, DataDog had already gained mindshare.
+
+### Integration Story
+DataDog demonstrated pre-built integrations with Accenture's existing toolchain more effectively than our team could communicate our capabilities.
+
+## Business Impact
+
+- **Lost ARR**: $2.5M annually
+- **Reference loss**: Accenture would have been a premier reference customer
+- **Competitive precedent**: DataDog can now cite this win in similar enterprise deals
+
+## Lessons Learned
+
+**Flexible pricing needed**: Enterprise pricing must accommodate high-volume customers with different consumption patterns
+
+**Log UX matters**: Even if technically superior, user experience drives perception and adoption
+
+**Early SE engagement critical**: Solution Architecture must be involved from day one on strategic deals
+
+**Integration showcase**: Better demonstration of ecosystem integrations required`,
+    metadata: {
+      duration: 4,
+      tags: ['Case Study', 'Competitive', 'Loss'],
+      relatedTopics: ['Academy', 'Shell']
+    }
+  },
+
+  'shell': {
+    id: 'shell',
+    title: 'Case Study: Shell FinOps',
+    type: 'case-study',
+    content: `**CASE STUDY: Shell FinOps Solution Gap**
+
+## Background
+
+Shell, one of the world's largest energy companies, required sophisticated FinOps capabilities to track cloud spending across their global digital operations.
+
+## The Request
+
+Shell needed:
+- Real-time cost attribution by business unit
+- Chargeback mechanisms for cloud resource usage
+- Forecasting and budget alerting
+- Integration with their financial systems
+
+## Service Gap Analysis
+
+### Platform Limitations
+Dynatrace excelled at performance monitoring but lacked native FinOps capabilities Shell required for their cost management program.
+
+### Custom Development Scope
+Building custom solutions would have required:
+- 6-month development timeline
+- Dedicated development team
+- Ongoing maintenance commitment
+- Integration with Shell's financial systems
+
+### Competitive Alternative
+Cloud-native FinOps platforms offered turn-key solutions specifically designed for cost management, making them more attractive for this use case.
+
+## Business Impact
+
+**Revenue at Risk**: $1M+ annual contract value
+
+**Relationship Strain**: Shell questioned our understanding of their broader needs
+
+**Scope Creep**: Attempt to shoe-horn FinOps into monitoring platform
+
+## Resolution Path
+
+Rather than force-fitting Dynatrace for FinOps, we should have:
+
+**Partnered**: Recommended best-of-breed FinOps tools alongside Dynatrace
+
+**Positioned correctly**: Focused on correlation between cost and performance
+
+**Ecosystem play**: Built integrations with FinOps platforms instead of competing
+
+## Organizational Learning
+
+This case highlights the need for:
+
+- **Solution breadth assessment**: Honest evaluation of platform capabilities vs. customer needs
+- **Partner ecosystem**: Strong relationships with complementary vendors
+- **Platform positioning**: Clear communication of what we do and don't do
+- **Customer success**: Putting customer outcomes ahead of product sales`,
+    metadata: {
+      duration: 4,
+      tags: ['Case Study', 'FinOps', 'Service Loss'],
+      relatedTopics: ['GM', 'Accenture']
+    }
+  },
+
+  'academy': {
+    id: 'academy',
+    title: 'Case Study: Academy Migration',
+    type: 'case-study',
+    content: `**CASE STUDY: Academy Sports + Outdoors Migration**
+
+## Background
+
+Academy Sports + Outdoors, a major U.S. sporting goods retailer, purchased a migration from legacy APM to Dynatrace.
+
+## The Promise vs Reality
+
+### What Was Sold
+- Complete migration in 90 days
+- Minimal disruption to operations
+- Comprehensive training and knowledge transfer
+- Optimized monitoring strategy
+
+### What Was Delivered
+Our services team was not adequately prepared:
+- **Resource shortage**: Only 1 consultant assigned instead of planned 3
+- **Expertise gap**: Consultant lacked retail industry experience
+- **Timeline slip**: 90-day project extended to 6 months
+- **Scope creep**: Unexpected complexity in legacy system integrations
+
+## Root Causes
+
+### Sales-Services Disconnect
+Sales team committed to aggressive timeline without consulting services capacity and capability.
+
+### Discovery Inadequacy
+Pre-sales technical discovery missed critical complexity factors in Academy's environment.
+
+### Skill Mismatch
+Assigned consultant had manufacturing background, not retail/e-commerce expertise needed.
+
+## Impact
+
+**Customer Satisfaction**: Significant erosion of trust and relationship
+
+**Financial**: Professional services delivered at loss due to extended timeline
+
+**Internal**: Friction between sales and services organizations
+
+**Reputation**: Academy shared concerns with peer retailers
+
+## Corrective Actions
+
+Post-incident, we implemented:
+
+**Pre-engagement assessment**: Services must validate capacity and capability before sales commitments
+
+**Skill matching**: Better alignment of consultant expertise with customer industry and use case
+
+**Discovery rigor**: Standardized assessment tools to uncover complexity early
+
+**Resource planning**: Buffer allocation for unforeseen challenges`,
+    metadata: {
+      duration: 3,
+      tags: ['Case Study', 'Migration', 'Preparation'],
+      relatedTopics: ['Accenture', 'GM']
+    }
+  },
+
+  'gm': {
+    id: 'gm',
+    title: 'Case Study: GM Incident',
+    type: 'case-study',
+    content: `**CASE STUDY: General Motors - "Didn't See It Coming"**
+
+## Background
+
+General Motors experienced a critical production incident that should have been visible in Dynatrace but was missed.
+
+## The Incident
+
+### What Happened
+GM's customer-facing website experienced intermittent slowdowns affecting their direct-to-consumer vehicle configuration tool.
+
+### Detection Failure
+Despite having Dynatrace deployed:
+- No alerts fired before customer complaints
+- Incident root cause took 4 hours to identify
+- Impact: Estimated $500K in lost sales opportunities
+
+## Why We Missed It
+
+### Monitoring Gaps
+**Synthetic monitoring not configured**: No proactive checks of critical user journeys
+
+**Alerting thresholds wrong**: Set too conservatively based on historical patterns
+
+**Custom apps unmonitored**: React SPA not instrumented properly
+
+### Team Readiness
+**Lack of runbooks**: No predefined response procedures
+
+**On-call confusion**: Unclear escalation path and ownership
+
+**Tool familiarity**: Operations team not trained on Dynatrace capabilities
+
+## Organizational Impact
+
+**Customer confidence**: GM questioned value of Dynatrace investment
+
+**Expansion at risk**: Planned rollout to additional business units paused
+
+**Competitive threat**: GM explored alternative monitoring solutions
+
+## Preventive Measures
+
+### Technical
+- Comprehensive synthetic monitoring implementation
+- Alert tuning workshops with GM operations team
+- Full-stack instrumentation validation
+- Custom dashboard creation for key user journeys
+
+### Organizational
+- Joint incident response playbooks
+- Monthly health checks and optimization sessions
+- Dedicated Customer Success Manager assignment
+- Executive business reviews to align on success criteria`,
+    metadata: {
+      duration: 3,
+      tags: ['Case Study', 'Incident', 'Visibility'],
+      relatedTopics: ['American Airlines', 'Shell']
+    }
+  },
+
+  'frit-boa': {
+    id: 'frit-boa',
+    title: 'Case Study: FRIT & BOA Navigation',
+    type: 'case-study',
+    content: `**CASE STUDY: FRIT & Bank of America - Service Navigation Complexity**
+
+## Background
+
+Both FRIT (Financial institution) and Bank of America represent complex enterprise customers with intricate service needs spanning multiple teams and organizations.
+
+## The Challenge
+
+### Multi-Team Coordination
+Customer requests touch:
+- Solutions Architecture team
+- Professional Services
+- Technical Support
+- Customer Success
+- Product Management
+- Engineering
+
+### Information Silos
+- No single source of truth for customer status
+- Email chains spanning dozens of participants
+- Slack channels with overlapping membership
+- Critical context lost in translation
+
+### Escalation Confusion
+When issues arise:
+- Unclear who owns the customer relationship
+- Multiple parallel escalation paths
+- Duplicated efforts and contradictory guidance
+- Customer frustration with "being passed around"
+
+## Specific Examples
+
+### FRIT Scenario
+Customer needed migration assistance but contacted support first. Ticket was escalated through 3 teams before reaching Services, adding 5 days of delay.
+
+### BOA Scenario
+Product question about roadmap capability routed to Support, then TAM, then Product Management, then back to Solutions Architecture. Customer received 4 different answers.
+
+## Impact Assessment
+
+**Efficiency loss**: 30-40% of customer-facing time spent on internal coordination
+
+**Customer experience**: Perception of disorganized, siloed vendor
+
+**Competitive risk**: Customers compare our responsiveness unfavorably to competitors
+
+**Employee satisfaction**: Team frustration with unclear ownership and duplicated work
+
+## Proposed Solutions
+
+### Organizational
+**Integrated Account Teams**: Single point of contact with clear routing rules
+
+**Unified Customer View**: Shared system showing all customer interactions and status
+
+**Standardized Handoffs**: Documented procedures for transitions between teams
+
+### Technical
+**Customer Portal**: Self-service hub with intelligent routing
+
+**Collaboration Platform**: Purpose-built tool for customer-facing teams
+
+**Knowledge Base**: Centralized repository of solutions and guidance
+
+This case study directly motivates the PulseBoard initiative - an AI-driven system to route customer signals to the right owners automatically.`,
+    metadata: {
+      duration: 4,
+      tags: ['Case Study', 'Navigation', 'Complexity'],
+      relatedTopics: ['American Airlines']
+    }
+  },
+
+  'american-airlines': {
+    id: 'american-airlines',
+    title: 'Case Study: American Airlines',
+    type: 'case-study',
+    content: `**CASE STUDY: American Airlines - Infrastructure Sharing & Architecture Blindness**
+
+## Background
+
+American Airlines shares infrastructure with DISH Network following a unique corporate arrangement. This created unprecedented complexity in their Dynatrace deployment.
+
+## The Complexity
+
+### Shared Infrastructure
+- **Hybrid ownership**: Some services owned by AA, others by DISH
+- **Data sovereignty**: Strict separation requirements despite shared hardware
+- **Cost allocation**: Complex chargeback mechanisms between organizations
+- **Security boundaries**: Isolation requirements within shared environment
+
+### Architecture Visibility Challenges
+
+We lost clear sight of:
+- Which services belonged to which business entity
+- Data flow patterns across organizational boundaries
+- Ownership and responsibility for shared components
+- Impact radius of changes in shared infrastructure
+
+## The Incidents
+
+### Sev 1 Pattern
+
+Multiple severity 1 incidents occurred:
+
+**Incident 1**: Shared database performance degradation affected both organizations but alerts only configured for AA services
+
+**Incident 2**: DISH deployment broke AA critical path; no visibility into cross-tenant dependencies
+
+**Incident 3**: Resource contention between workloads; no clear ownership for resolution
+
+### Root Cause Analysis
+
+**Architectural complexity**: Shared infrastructure model not fully understood or documented
+
+**Monitoring gaps**: Instrumentation didn't account for multi-tenant scenarios
+
+**Communication breakdown**: No established protocols for coordinating across business entities
+
+**Ownership confusion**: Unclear responsibility for shared components
+
+## Business Impact
+
+**Service reliability**: Multiple customer-facing outages
+
+**Relationship strain**: AA questioned our ability to handle complexity
+
+**Expansion risk**: Plans for broader Dynatrace deployment on hold
+
+**Reference concern**: AA would not serve as reference due to incidents
+
+## Remediation
+
+### Immediate Actions
+- Architecture deep-dive and comprehensive documentation
+- Enhanced monitoring across tenant boundaries
+- Dedicated TAM assignment with regular touchpoints
+- Joint incident response procedures with both AA and DISH
+
+### Long-term Solutions
+- **Reference architectures**: Document patterns for shared infrastructure
+- **Multi-tenancy best practices**: Establish monitoring strategies for complex ownership
+- **Change coordination**: Processes for managing interdependent deployments
+- **Proactive monitoring**: Predictive analytics to identify cross-tenant issues
+
+## Lessons for Organization
+
+This case illustrates the need for:
+
+**Architecture expertise**: Deeper understanding of customer environment complexity before deployment
+
+**Multi-party coordination**: Tools and processes for managing shared infrastructure scenarios
+
+**Preventive monitoring**: Proactive identification of architectural risks
+
+**Customer architecture documentation**: Maintained by Dynatrace team, not just customer`,
+    metadata: {
+      duration: 4,
+      tags: ['Case Study', 'Architecture', 'Sev1'],
+      relatedTopics: ['GM', 'FRIT & BOA']
+    }
+  },
+
+  // Additional topics would follow the same pattern...
+  // For brevity, I'll add a few more key topics
+
+  'ai-mindset': {
+    id: 'ai-mindset',
+    title: 'AI Mindset & Organizational Readiness',
+    type: 'markdown',
+    content: `Adopting AI successfully requires fundamental shifts in how we think about work, tooling, and organizational capability.
+
+## The AI Mindset Shift
+
+### From Manual to Automated
+Traditional approaches rely on human analysis at every step. AI enables:
+- **Automated triage**: Route issues to right owners instantly
+- **Pattern recognition**: Identify trends across thousands of customer interactions
+- **Predictive insights**: Anticipate problems before they occur
+
+### From Reactive to Proactive
+Stop firefighting, start preventing:
+- **Early warning systems**: Detect weak signals of customer risk
+- **Prescriptive guidance**: Recommend actions based on historical patterns
+- **Continuous optimization**: Learn and improve automatically
+
+## Organizational Readiness Assessment
+
+### Culture
+- **Experimentation mindset**: Safe to try new AI-powered approaches
+- **Data-driven decision making**: Trust insights from AI analysis
+- **Continuous learning**: Willingness to adapt processes as AI capabilities evolve
+
+### Skills
+- **Prompt engineering**: Crafting effective AI interactions
+- **Data literacy**: Understanding AI outputs and limitations
+- **Integration capabilities**: Connecting AI tools to existing workflows
+
+### Infrastructure
+- **Data accessibility**: Clean, organized, accessible customer data
+- **API integration**: Ability to connect AI services to internal systems
+- **Feedback loops**: Mechanisms to improve AI performance over time
+
+## Common Resistance Points
+
+**"AI will replace jobs"**: Reframe as augmentation - AI handles repetitive work, humans focus on high-value activities
+
+**"We've always done it this way"**: Acknowledge past success while embracing necessary evolution
+
+**"Too complex/expensive"**: Start with focused use cases that demonstrate clear ROI
+
+## Success Patterns
+
+Organizations succeeding with AI share:
+- **Executive sponsorship**: Leadership actively championing AI adoption
+- **Pilot programs**: Starting small with measurable outcomes
+- **Cross-functional teams**: Bringing together domain experts and AI specialists
+- **Iterative improvement**: Learning from failures and building on successes`,
+    metadata: {
+      duration: 5,
+      tags: ['AI', 'Mindset', 'Culture'],
+      relatedTopics: ['Security Considerations']
+    }
+  },
+
+  'rag-fundamentals': {
+    id: 'rag-fundamentals',
+    title: 'RAG, Chunking & Embeddings',
+    type: 'markdown',
+    content: `# Understanding RAG: Making AI Smarter with Your Data
+
+## RAG Architecture Overview
+
+![RAG Architecture](https://community.intersystems.com/sites/default/files/inline/images/images/image(9789).png)
+
+*The diagram above shows the complete end-to-end RAG workflow: from ingesting massive datasets through embeddings and vector storage, to query processing and AI-generated responses powered by InterSystems technology*
+
+---
+
+## Executive Summary
+
+**RAG (Retrieval-Augmented Generation)** is the technology that allows AI systems to answer questions using your organization's private documents and knowledge base - without expensive retraining or data security risks.
+
+**Think of it this way**: Instead of training an AI from scratch on your company data (expensive and risky), RAG lets AI "look up" relevant information from your documents in real-time, just like a research assistant consulting a library before answering a question.
+
+---
+
+## The Business Problem
+
+**Challenge**: Pre-trained AI models (like ChatGPT) don't know about:
+- Your company's internal policies and procedures
+- Your customer-specific data
+- Your proprietary knowledge base
+- Recent information (models have knowledge cutoff dates)
+
+**Traditional Solution**: Retrain the entire AI model on your data
+- **Cost**: Millions of dollars
+- **Risk**: Your private data becomes part of the model
+- **Maintenance**: Must retrain constantly as data changes
+
+**RAG Solution**: Keep your data separate, let AI search it when needed
+- **Cost**: Minimal infrastructure
+- **Risk**: Data stays private and secure
+- **Maintenance**: Update documents anytime, AI sees changes immediately
+
+---
+
+## How RAG Works: The 3 Key Components
+
+*(Refer to the architecture diagram at the top to visualize each component)*
+
+### 1. **Chunking**: Breaking Down Knowledge
+
+**What It Is**: Splitting large documents into smaller, digestible pieces
+
+**Why It Matters**:
+- AI models have limited "attention span" (context windows)
+- Searching through smaller chunks is faster and more precise
+- Find exactly the relevant paragraph, not the entire 200-page manual
+
+**Business Example**:
+- Your 500-page employee handbook becomes 1,000 searchable chunks
+- When someone asks "What's the vacation policy?", the AI searches only relevant sections
+- Response time: seconds instead of minutes
+
+**Key Metrics**:
+- Chunk size: 200-500 words (optimized for retrieval speed and accuracy)
+- Overlap: 10-20% between chunks (ensures context isn't lost at boundaries)
+
+---
+
+### 2. **Embeddings**: Creating a Searchable Map
+
+**What It Is**: Converting text into numerical representations (vectors) that capture meaning
+
+**Why It Matters**:
+- AI can find documents by **meaning**, not just keyword matching
+- "laptop battery life" will find documents about "portable computer power duration"
+- Understands synonyms, context, and semantic relationships
+
+**Business Example**:
+- Employee asks: "How do I request time off?"
+- Traditional search: Looks for exact words "request time off"
+- Embedding search: Finds "vacation approval process", "leave of absence forms", "PTO submission"
+
+**Technical Note** *(for those interested)*:
+- Each chunk becomes a vector with 768-1536 dimensions
+- Stored in a **Vector Database** (specialized for fast similarity search)
+- Similar concepts cluster together in vector space
+
+**Performance**:
+- Search speed: Milliseconds across millions of documents
+- Accuracy: 85-95% retrieval precision for well-structured content
+
+---
+
+### 3. **RAG**: Putting It All Together
+
+**The Workflow** (see diagram):
+
+1. **Setup Phase** (one-time):
+   - Your private documents are split into **chunks**
+   - Each chunk is converted into an **embedding** (vector)
+   - Vectors are stored in a **Vector Store** for fast retrieval
+
+2. **Query Phase** (every user question):
+   - User asks a question: *"What's our remote work policy?"*
+   - Question is converted into an embedding
+   - System searches vector store for most similar chunks
+   - Top 3-5 most relevant chunks are retrieved
+
+3. **Generation Phase**:
+   - Retrieved chunks + original question = **Context**
+   - Context is sent to pre-trained LLM (like GPT-4, Claude)
+   - LLM generates answer based on your actual documents
+   - Response includes citations to source documents
+
+**Security Advantage**:
+- Your documents never leave your infrastructure
+- Pre-trained model never sees your data during training
+- Access controls on documents are respected
+- Audit trail of what information was accessed
+
+---
+
+## Why This Matters for Our Organization
+
+### **Speed to Value**
+- Deploy in weeks, not years
+- No model retraining required
+- Works with existing document repositories
+
+### **Cost Efficiency**
+- Leverage pre-trained models ($0.01-$0.10 per query)
+- Avoid custom model training (millions of dollars)
+- Scale horizontally with demand
+
+### **Data Security**
+- Documents stay in your environment
+- Encryption at rest and in transit
+- Role-based access control
+- Compliance-friendly (GDPR, HIPAA, SOC 2)
+
+### **Flexibility**
+- Update documents anytime - changes reflect immediately
+- Support multiple languages
+- Integrate with existing tools (SharePoint, Confluence, etc.)
+- No vendor lock-in
+
+---
+
+## Real-World Use Cases
+
+### **Customer Support**
+- Agent asks: "How do I handle a refund for international orders?"
+- RAG retrieves: Refund policy, international shipping terms, currency conversion rules
+- Result: Accurate answer in seconds, consistent across all agents
+
+### **Employee Onboarding**
+- New hire asks: "What benefits am I eligible for?"
+- RAG retrieves: Benefits handbook, eligibility rules, enrollment deadlines
+- Result: Self-service onboarding, reduced HR burden
+
+### **Compliance & Legal**
+- Analyst asks: "What are our data retention requirements for customer data?"
+- RAG retrieves: Compliance policies, legal documentation, industry regulations
+- Result: Confident answers backed by official documents
+
+---
+
+## Technology Stack Example
+
+**Components**:
+- **Document Ingestion**: Process PDFs, Word docs, web pages, databases
+- **Chunking Engine**: LangChain, LlamaIndex (open source)
+- **Embedding Model**: OpenAI, Cohere, or open source (BGE, E5)
+- **Vector Database**: InterSystems IRIS, Pinecone, Weaviate, Chroma
+- **LLM**: Claude, GPT-4, Llama 3 (hosted or private)
+- **Orchestration**: LangChain, LlamaIndex
+
+**Deployment Options**:
+- Cloud-hosted (AWS, Azure, GCP)
+- On-premises (for maximum security)
+- Hybrid (vector store in cloud, documents on-prem)
+
+---
+
+## Getting Started: Pilot Program
+
+### **Phase 1**: Proof of Concept (2-4 weeks)
+- Select 1-2 use cases (e.g., IT helpdesk, HR policies)
+- Ingest 100-500 documents
+- Test with 10-20 users
+- Measure: Accuracy, response time, user satisfaction
+
+### **Phase 2**: Department Rollout (1-2 months)
+- Expand to full department
+- Integrate with existing workflows
+- Gather feedback, iterate on chunking and retrieval strategies
+- Measure: Usage metrics, time saved, error reduction
+
+### **Phase 3**: Enterprise Scale (3-6 months)
+- Roll out org-wide
+- Multi-language support
+- Advanced features (citation tracking, feedback loops)
+- Measure: ROI, productivity gains, support ticket reduction
+
+---
+
+## Key Takeaways
+
+✅ **RAG makes AI smarter** by giving it access to your organization's knowledge
+
+✅ **Chunking** breaks documents into searchable pieces for precise retrieval
+
+✅ **Embeddings** enable semantic search - find documents by meaning, not just keywords
+
+✅ **Secure & Scalable** - your data stays private, costs are predictable
+
+✅ **Fast to deploy** - weeks, not years, to value
+
+✅ **Flexible** - update content anytime, AI adapts immediately
+
+---
+
+## Questions to Consider
+
+1. **What document repositories** would provide the most value if AI-searchable?
+2. **Which departments** have the highest volume of repetitive questions?
+3. **What security requirements** must be met for your data?
+4. **What success metrics** would you use to measure ROI?
+
+**Next Steps**: Identify a pilot use case and assemble a cross-functional team (IT, business stakeholders, data governance).`,
+    metadata: {
+      duration: 5,
+      tags: ['AI', 'RAG', 'Embeddings', 'Vector Search'],
+      relatedTopics: ['AI Mindset', 'Security Considerations', 'Knowledge Graphs']
+    }
+  },
+
+  'volumetric-explorer': {
+    id: 'volumetric-explorer',
+    title: 'Volumetric Explorer: Best Buy Case Study',
+    type: 'markdown',
+    content: `## 🚀 Access the Live Application
+
+**Ready to explore the Volumetric Explorer app?**
+
+**To check out the Volumetric Explorer click the link below:**
+
+**👉 https://jhl74831.apps.dynatrace.com/ui/apps/my.d1esa.dynatrace.volexplorer**
+
+*(Right-click and open in a new tab to keep your place in the presentation)*
+
+---
+
+The Volumetric Explorer application demonstrates the power of rapid Gen3 app development to solve critical customer challenges and influence platform adoption decisions.
+
+## Customer Challenge: Best Buy
+
+Best Buy identified a critical operational gap in their infrastructure management:
+
+### The Volumetric Trending Need
+
+**Business Context**: Best Buy requires proactive capacity planning and infrastructure provisioning
+
+**Key Requirements**:
+- **Long-period monitoring**: Track data volumes over 7-14 day periods, not just real-time
+- **Trend-based thresholds**: Identify when volumes trend >35% higher over the monitoring window
+- **Automated provisioning**: Trigger infrastructure scaling and provisioning workflows based on trends
+- **Flexible querying**: Analyze any data source or metric, not just predefined dashboards
+
+**The Gap**: Traditional monitoring focused on real-time thresholds, not volumetric trends over extended periods
+
+## The Solution: Volumetric Explorer Gen3 App
+
+**Development Time**: Built in approximately 10 hours total
+
+**Deployed To**: Same Dynatrace environment (https://jhl74831.apps.dynatrace.com)
+
+### Core Capabilities
+
+#### 1. Flexible DQL Query Input
+- Users provide any DQL query to analyze
+- Query results must include: date, hour, and volume fields
+- Example: Log volumes, metric aggregations, entity counts, custom data
+
+#### 2. 3D Volumetric Visualization
+The app creates an interactive 3D visualization where:
+- **X-axis**: Days (30-day period)
+- **Z-axis**: Hours of day (0-23, covering full 24-hour cycle)
+- **Y-axis (height)**: Volume value
+- **Color gradient**: Visual indicator of volume intensity
+  - Green: Low volume
+  - Yellow: Medium volume
+  - Orange: Elevated volume
+  - Red: High volume
+
+Users can rotate, zoom, and interact with the 3D chart to identify patterns across time and hours.
+
+#### 3. Trend Analysis Engine
+
+**Configurable Analysis Parameters**:
+- **Evaluation Period**: Select 1-30 days for trend analysis
+- **Hour Range**: Focus on specific hours (e.g., business hours 9-17, or full 24-hour day)
+- **Comparison Modes**:
+  - **Start Period Comparison**: Compare all days to the first day in the period
+  - **Day-over-Day**: Compare each day to the previous day
+
+**Calculated Metrics**:
+- Daily volume totals within specified hour range
+- Percentage change trends
+- Overall trend direction (increasing/decreasing/stable)
+- Visual trend line chart with color-coded indicators
+
+**Example Output**:
+> "Volumes are trending UP by 42.3% over the last 14 days (hours 9-17)"
+
+#### 4. Auto-Generated Dynatrace Workflows
+
+**The Key Innovation**: Based on the configured trend analysis settings, the app can auto-generate:
+- **Dynatrace Workflow definitions** with:
+  - DQL query embedded
+  - Volumetric trending logic built-in
+  - Configured evaluation period, hour range, and thresholds
+  - Schedule settings (e.g., run hourly, daily)
+
+**Workflow Integration**:
+- Users can review the generated workflow
+- Adjust threshold actions (e.g., "if trend >35%, trigger provisioning")
+- Add downstream actions:
+  - Create ServiceNow tickets
+  - Trigger infrastructure provisioning APIs
+  - Send notifications to teams
+  - Execute custom automation scripts
+
+**Benefits**:
+- Zero manual workflow creation
+- Settings from UI automatically translated to workflow code
+- Proven trend detection logic packaged for reuse
+- Rapid deployment of monitoring-to-action automation
+
+## Business Impact
+
+### Immediate Value Delivery
+
+**Speed**: Built in ~10 hours, addressing a critical gap identified by Best Buy
+
+**Flexibility**: Any DQL query = analyze any data source without code changes
+
+**Actionable**: Trend detection directly translates to automated workflows
+
+### Influence on Gen3 Adoption
+
+This application serves as a **prime example** of Solutions Architect value:
+
+#### The SA Impact Pattern
+
+1. **Customer identifies need**: "We need volumetric trending for capacity planning"
+
+2. **SA provides immediate solution**: Build working app in ~10 hours using Gen3 platform
+
+3. **Customer sees platform capability**:
+   - Gen3 app development is fast
+   - Grail data + DQL = flexible querying
+   - AppEngine = custom logic without infrastructure
+   - Workflow integration = automation at scale
+
+4. **Decision influence**: Seeing real solution built for their needs influences:
+   - Confidence in Gen3 platform capabilities
+   - Willingness to migrate from legacy platforms
+   - Investment in Gen3 features (Grail, AppEngine, Workflows)
+   - Expansion of Dynatrace footprint
+
+#### Replicable Pattern
+
+This same approach applies to other customers:
+- **Identify**: Critical monitoring or automation gaps
+- **Build**: Rapid Gen3 app prototype (hours to days)
+- **Demonstrate**: Working solution with real customer data
+- **Influence**: Platform adoption and expansion decisions
+
+## Technical Architecture
+
+### Frontend Stack
+- **React 18** with TypeScript
+- **Strato Design System** for Dynatrace UI consistency
+- **@react-three/fiber** for 3D visualization (Three.js)
+- **DQL Editor component** for query input
+
+### Backend Stack
+- **Grail Query Execution**: Real-time DQL execution via \`queryExecutionClient\`
+- **Data Transformation**: DQL results → 3D visualization format
+- **Trend Calculation**: Statistical analysis of volumetric patterns
+- **Workflow Generation**: Automated workflow code generation
+
+### Key Features Implementation
+
+**Tab Interface**:
+1. **Volume Chart**: 3D visualization with interactive controls
+2. **Results**: Paginated data table showing all query results
+3. **Analytics**: Trend analysis with configurable parameters and trend line chart
+
+**State Management**:
+- Query state (DQL, execution status, results)
+- Visualization state (3D camera, hover interactions)
+- Analytics state (trend parameters, calculated metrics)
+
+## Lessons for the Organization
+
+### Speed of Development
+Gen3 platform enables:
+- Rapid app development (hours, not weeks)
+- Zero infrastructure provisioning (AppEngine handles it)
+- Immediate access to customer data (Grail integration)
+- Professional UI out-of-box (Strato components)
+
+### Customer-Driven Innovation
+- Listen for gaps in current tooling
+- Build targeted solutions, not generic dashboards
+- Demonstrate platform capability through working code
+- Influence adoption through value delivery
+
+### SA as Solution Builders
+Solutions Architects can:
+- Develop custom applications, not just configure products
+- Address unique customer requirements
+- Create reusable patterns and templates
+- Drive platform adoption through demonstrated capability
+
+## Demo Walkthrough
+
+During the demo, we'll show:
+
+1. **DQL Query Input**: How to write queries for volumetric analysis
+2. **3D Visualization**: Navigating the volumetric chart to find patterns
+3. **Trend Analysis**: Configuring analysis parameters and interpreting results
+4. **Use Case**: Best Buy's specific requirement and how the app addresses it
+5. **Workflow Generation**: Preview of auto-generated workflow (future capability)
+
+**Key Takeaway**: This app exemplifies how Solutions Architects can drive Gen3 adoption by building immediate, tangible solutions to customer challenges in a matter of hours.`,
+    metadata: {
+      duration: 8,
+      tags: ['Demo', 'Case Study', 'Best Buy', 'Gen3', 'App Development'],
+      relatedTopics: ['Template Overview', 'PulseBoard']
+    }
+  },
+
+  'pulseboard': {
+    id: 'pulseboard',
+    title: 'PulseBoard: Customer Signal Fabric',
+    type: 'markdown',
+    content: `PulseBoard is an AI-driven system that ingests customer signals from multiple sources, classifies and routes them intelligently, and provides unified visibility into customer health.
+
+## Vision
+
+**Zero blind spots**: All customer signals routed to right owners within hours
+
+**Single customer story**: One canonical, living view per account
+
+**Faster resolution**: Tie needs and gaps directly to owners and SLAs
+
+**Provable impact**: Measure movement in health scores and win/save rates
+
+## Signal Sources
+
+### Communication Channels
+- **Email**: customersolutions@dynatrace.com inbox
+- **Slack**: @customersolutions mentions and subscribed channels
+- **Support tickets**: JSM, Zendesk, ServiceNow integrations
+
+### Business Systems
+- **Salesforce**: Opportunities, cases, activities, entitlements
+- **Product telemetry**: Usage patterns and feature adoption
+- **Community**: Forum posts and documentation feedback
+
+### Development Systems
+- **GitLab**: Issues, merge requests with customer labels
+- **Deployment tracking**: Release notes and risk assessments
+- **QBR decks**: Customer business review artifacts
+
+## LangGraph Pipeline
+
+### 1. Ingest
+Connectors from all sources feed unified artifact queue
+
+### 2. Normalize & Redact
+- Schema unification across disparate sources
+- PII and secret scrubbing for privacy compliance
+- Metadata enrichment
+
+### 3. Entity Resolution
+Match artifacts to accounts, contacts, and opportunities using:
+- Email domain matching
+- CRM data correlation
+- Historical pattern recognition
+
+### 4. Signal Extraction
+LLM analyzes content to tag:
+- **Intent**: bug report, feature request, escalation, renewal discussion
+- **Sentiment**: strong negative to strong positive
+- **Urgency**: critical, high, medium, low
+- **Impact**: business value and risk level
+
+### 5. Routing & Actions
+Automatically create/update tasks in target systems:
+- Jira stories for product requests
+- Support tickets for technical issues
+- CSM action items for relationship management
+- SE engagement for pre-sales opportunities
+
+### 6. Summarization
+Generate daily briefs:
+- **Account reviews**: Per-customer health digest
+- **Portfolio heatmap**: Cross-account risk visualization
+- **Theme reports**: Recurring patterns and capability gaps
+
+## Output: Daily Account Review
+
+Example:
+
+**Account**: Globex Corp | ARR: $3.2M | Renewal: Mar 15, 2026
+**Health**: ▼ (-7 → 68) Issues with alert noise, SOC2 requests
+
+**Top Signals**:
+1. **Escalation (Critical)**: Synthetic checks flapping → Owner: Jane (SE-East)
+2. **Feature Request**: SLO by business unit → Owner: Product SLOs
+3. **Confusion**: DQL joins vs SPL → Owner: Docs
+4. **Renewal Risk**: Auto-renew dispute → Owner: CSM
+5. **Security**: Need signed pen-test → Owner: Security PM
+
+## Governance
+
+**Privacy**: PII scrubbing, RBAC, audit logging
+
+**Accuracy**: Human-in-loop review for uncertain predictions
+
+**Transparency**: Explainable AI with rationale for every classification
+
+## Metrics
+
+- Time-to-owner: < 5 minutes for P1, < 30 minutes for routine
+- Coverage: % of signals properly classified and routed
+- Impact: Correlation to NRR, CSAT, and customer health scores`,
+    metadata: {
+      duration: 5,
+      tags: ['Blueprint', 'PulseBoard', 'Customer Signals'],
+      relatedTopics: ['LangGraph', 'Forge Initiative']
+    }
+  },
+
+  'qa-session': {
+    id: 'qa-session',
+    title: 'Q&A Discussion',
+    type: 'markdown',
+    content: `# Open Q&A Session
+
+This is your opportunity to ask questions, share perspectives, and dive deeper into any of the topics we've covered.
+
+## Discussion Areas
+
+### Architecture & Deployments
+Questions about specific deployment models, migration paths, or architectural decisions
+
+### Service Challenges
+Share your own experiences with customer challenges or discuss the case studies presented
+
+### AI & Automation
+Explore AI applications, Claude capabilities, or implementation strategies
+
+### Tools & Solutions
+Deep dive into DynaBridge, PulseBoard, or other solution concepts
+
+### Organization & Vision
+Discuss the organizational blueprint and how it might impact your work
+
+## Action Items
+
+As we discuss, we'll capture:
+- Follow-up items requiring additional research
+- Potential pilot programs or experiments
+- Organizational changes to consider
+- Technical solutions to explore
+
+## Next Steps
+
+After this session:
+- Review recording and key takeaways
+- Schedule follow-up meetings for specific workstreams
+- Begin pilot planning for selected initiatives
+- Gather additional feedback from stakeholders
+
+Thank you for your time and engagement!`,
+    metadata: {
+      duration: 15,
+      tags: ['Q&A', 'Discussion'],
+      relatedTopics: []
+    }
+  }
+};

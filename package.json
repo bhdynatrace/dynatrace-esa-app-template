@@ -1,7 +1,7 @@
 {
-  "name": "dynatrace-gen3-app-template",
+  "name": "dynatrace1-esa-app-deepdive",
   "version": "1.0.0",
-  "description": "A template starter project for building Dynatrace Gen3 applications",
+  "description": "D1 - AI Deep Dive Presentation App",
   "private": true,
   "type": "module",
   "scripts": {
@@ -14,21 +14,28 @@
   },
   "dependencies": {
     "@dynatrace-sdk/app-environment": "^1.0.0",
+    "@dynatrace-sdk/app-utils": "^1.0.0",
     "@dynatrace-sdk/client-classic-environment-v2": "^4.2.1",
     "@dynatrace-sdk/client-grail": "file:./mocks/client-grail",
+    "@dynatrace-sdk/client-query": "^1.21.2",
     "@dynatrace-sdk/navigation": "^2.1.1",
-    "@dynatrace-sdk/app-utils": "^1.0.0",
     "@dynatrace-sdk/units": "^1.0.0",
     "@dynatrace/strato-components": "^1.0.0",
     "@dynatrace/strato-components-preview": "^2.4.1",
     "@dynatrace/strato-design-tokens": "^1.0.0",
     "@dynatrace/strato-icons": "^1.0.0",
-    "react-intl": "^6.3.0",
+    "@maxgraph/core": "^0.21.0",
+    "@react-three/drei": "^9.59.0",
+    "@react-three/fiber": "^8.13.0",
+    "mermaid": "^11.12.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "three": "^0.158.0",
-    "@react-three/fiber": "^8.13.0",
-    "@react-three/drei": "^9.59.0"
+    "react-intl": "^6.3.0",
+    "react-markdown": "^10.1.0",
+    "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "three": "^0.158.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.0",

@@ -1,17 +1,30 @@
-import { Flex } from '@dynatrace/strato-components';
-import Dashboard from './pages/Dashboard';
+import { useState } from 'react';
+import { PasswordScreen } from './components/PasswordScreen';
+import { SplashScreen } from './components/SplashScreen';
+import DeepDivePresentation from './pages/DeepDivePresentation';
+
+type AppStage = 'password' | 'splash' | 'presentation';
 
 export const App = () => {
-  return (
-    <Flex
-      flexDirection="column"
-      style={{
-        minHeight: '100vh',
-        backgroundColor: 'var(--dt-colors-background-base-default, #1b1c2e)',
-        color: 'var(--dt-colors-text-neutral-default, #f0f0f5)'
-      }}
-    >
-      <Dashboard />
-    </Flex>
-  );
+  const [stage, setStage] = useState<AppStage>('password');
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const handleAuthenticated = (adminMode: boolean) => {
+    setIsAdmin(adminMode);
+    setStage('splash');
+  };
+
+  const handleSplashComplete = () => {
+    setStage('presentation');
+  };
+
+  if (stage === 'password') {
+    return <PasswordScreen onAuthenticated={handleAuthenticated} />;
+  }
+
+  if (stage === 'splash') {
+    return <SplashScreen onComplete={handleSplashComplete} />;
+  }
+
+  return <DeepDivePresentation isAdmin={isAdmin} />;
 };

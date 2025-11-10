@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="28.2.9">
+  <diagram name="Page-1" id="u6YJfjRrawbTjvCUq_3k">
+    <mxGraphModel dx="1155" dy="1093" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillStyle=solid;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="250" y="160" width="400" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="AI Engineering" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="260" y="210" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="Solutions&amp;nbsp;&lt;br&gt;Architecture" style="rounded=1;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="260" y="290" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Solutions&amp;nbsp;&lt;br&gt;Development" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="390" y="290" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="Solutions&amp;nbsp;&lt;br&gt;Delivery" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="520" y="290" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="" style="shape=doubleArrow;direction=south;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="260" width="30" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="" style="shape=doubleArrow;direction=south;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="435" y="260" width="30" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="" style="shape=doubleArrow;direction=south;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="260" width="30" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="Customer Solutions &amp;amp; AI Engineering" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=17;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="260" y="170" width="380" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,14 +1,22 @@
 {
-  "environmentUrl": "https://nyw40909.apps.dynatrace.com",
+  "environmentUrl": "https://jhl74831.apps.dynatrace.com",
   "app": {
-  "id": "my.d1esa.dynatrace.template",
-    "name": "Template App (D1-ESA)",
-  "version": "1.0.1",
-    "description": "D1 ESA Dynatrace Gen3 application template",
+  "id": "my.d1esa.dynatrace.deepdive",
+    "name": "D1 Leadership AI Deep Dive",
+  "version": "1.9.5",
+    "description": "D1 - AI Deep Dive Presentation App",
     "scopes": [
       {
         "name": "storage:logs:read",
         "comment": "Read access to logs stored in Grail"
+      },
+      {
+        "name": "storage:logs:write",
+        "comment": "Write access to ingest logs for admin content management"
+      },
+      {
+        "name": "storage:buckets:read",
+        "comment": "Read access to Grail buckets for DQL queries"
       },
       {
         "name": "storage:metrics:read",
