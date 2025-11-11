@@ -38,11 +38,11 @@ export async function getGlobalTheme(): Promise<ThemeId> {
       }
     }
 
-    console.log('[ThemeSettings] No global theme found, using default: classic');
-    return 'classic';
+    console.log('[ThemeSettings] No global theme found, using default: cosmic');
+    return 'cosmic';
   } catch (error) {
     console.debug('[ThemeSettings] Error loading theme, using default:', error);
-    return 'classic';
+    return 'cosmic';
   }
 }
 

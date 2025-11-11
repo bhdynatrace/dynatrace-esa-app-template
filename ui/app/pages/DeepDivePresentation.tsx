@@ -38,7 +38,7 @@ const DeepDivePresentation: React.FC<DeepDivePresentationProps> = ({ isAdmin = f
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState<ThemeId>('classic');
+  const [currentTheme, setCurrentTheme] = useState<ThemeId>('cosmic');
 
   // Load global theme from app-settings (applies to all users)
   useEffect(() => {
@@ -118,9 +118,11 @@ const DeepDivePresentation: React.FC<DeepDivePresentationProps> = ({ isAdmin = f
       setIsLoading(true);
       try {
         // Try log content first (for admin-uploaded content)
+        console.log(`[DeepDivePresentation] Loading content for topic: ${currentTopic}`);
         const logContent = await fetchTopicContent(currentTopic);
 
         if (logContent) {
+          console.log(`[DeepDivePresentation] ✓ Using LOG content for ${currentTopic} (${logContent.length} chars)`);
           // If we have log content, use ONLY that (with metadata from local content)
           const baseContent = CONTENT_DATA[currentTopic];
           if (baseContent) {
@@ -144,6 +146,7 @@ const DeepDivePresentation: React.FC<DeepDivePresentationProps> = ({ isAdmin = f
           }
         } else {
           // No log content found, use local content from project
+          console.log(`[DeepDivePresentation] ✗ No log content found for ${currentTopic}, using STATIC content`);
           const localContent = CONTENT_DATA[currentTopic];
           if (localContent) {
             setCurrentContent(localContent);

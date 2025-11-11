@@ -6,6 +6,8 @@
 import React, { useState, useRef } from 'react';
 import { Flex, Text, Button } from '@dynatrace/strato-components';
 import { uploadTopicContent } from '../services/logContentService';
+import { setCurrentUploadId } from '../services/contentVersionService';
+import { setCurrentUploadIdInSettings } from '../services/appSettingsService';
 
 interface AdminContentUploaderProps {
   topicId: string;
@@ -38,18 +40,30 @@ export const AdminContentUploader: React.FC<AdminContentUploaderProps> = ({
       // Read file content
       const content = await file.text();
 
-      // Upload to Grail logs (always creates new entry with latest timestamp)
-      const success = await uploadTopicContent(topicId, content);
+      // Upload using hybrid storage (cache + app-settings + logs)
+      const uploadId = await uploadTopicContent(topicId, content);
 
-      if (success) {
-        setUploadStatus('success');
-        // Grail logs take time to index - wait longer and trigger multiple refreshes
-        // First refresh after 3 seconds
+      if (uploadId) {
+        // Save the uploadId in BOTH app-settings (reliable) and logs (backup)
+        const settingsSaved = await setCurrentUploadIdInSettings(topicId, uploadId);
+        const logVersionSaved = await setCurrentUploadId(topicId, uploadId);
+
+        if (settingsSaved || logVersionSaved) {
+          setUploadStatus('success');
+          console.log(`[AdminContentUploader] ✓ Content uploaded for ${topicId}`);
+          console.log(`[AdminContentUploader]   - App-settings: ${settingsSaved ? 'saved' : 'failed'}`);
+          console.log(`[AdminContentUploader]   - Log version: ${logVersionSaved ? 'saved' : 'failed'}`);
+          console.log(`[AdminContentUploader]   - Cache: always saved`);
+        } else {
+          console.warn(`[AdminContentUploader] Content in cache but version tracking failed for ${topicId}`);
+          setUploadStatus('success'); // Still show success since content is in cache
+        }
+
+        // Content should be immediately available from cache, but trigger refresh anyway
+        // Immediate refresh (cache should have it)
+        setTimeout(() => onContentUpdated(), 100);
+        // Secondary refresh after 3 seconds (app-settings and logs should be indexed)
         setTimeout(() => onContentUpdated(), 3000);
-        // Second refresh after 6 seconds (in case first didn't catch it)
-        setTimeout(() => onContentUpdated(), 6000);
-        // Third refresh after 10 seconds
-        setTimeout(() => onContentUpdated(), 10000);
 
         // Close modal after showing success message
         setTimeout(() => {

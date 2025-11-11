@@ -62,61 +62,70 @@ export const TOPICS_DATA: Record<ModuleId, Topic[]> = {
       duration: 3,
       order: 1,
       tags: ['challenges', 'overview'],
-      relatedTopics: ['accenture', 'shell']
+      relatedTopics: ['esa-summary', 'accenture', 'shell']
+    },
+    {
+      id: 'esa-summary',
+      title: 'ESA Summary',
+      contentFile: 'esa-summary.md',
+      duration: 5,
+      order: 2,
+      tags: ['esa', 'summary', 'overview'],
+      relatedTopics: ['challenges-overview', 'accenture']
     },
     {
       id: 'accenture',
       title: 'Case Study: Accenture vs DataDog',
       contentFile: 'accenture.md',
       duration: 4,
-      order: 2,
+      order: 3,
       tags: ['case-study', 'competitive', 'loss'],
-      relatedTopics: ['academy', 'shell']
+      relatedTopics: ['esa-summary', 'academy', 'shell']
     },
     {
       id: 'academy',
       title: 'Case Study: Academy Migration',
       contentFile: 'academy.md',
       duration: 3,
-      order: 3,
+      order: 4,
       tags: ['case-study', 'migration', 'preparation'],
-      relatedTopics: ['accenture', 'gm']
+      relatedTopics: ['accenture', 'shell']
     },
     {
       id: 'shell',
       title: 'Case Study: Shell FinOps',
       contentFile: 'shell.md',
       duration: 4,
-      order: 4,
-      tags: ['case-study', 'finops', 'service-loss'],
-      relatedTopics: ['gm', 'accenture']
-    },
-    {
-      id: 'gm',
-      title: 'Case Study: GM Incident',
-      contentFile: 'gm.md',
-      duration: 3,
       order: 5,
-      tags: ['case-study', 'incident', 'visibility'],
-      relatedTopics: ['american-airlines', 'shell']
+      tags: ['case-study', 'finops', 'service-loss'],
+      relatedTopics: ['academy', 'esa-ai-case-01']
     },
     {
-      id: 'frit-boa',
-      title: 'Case Study: FRIT & BOA Navigation',
-      contentFile: 'frit-boa.md',
-      duration: 4,
+      id: 'esa-ai-case-01',
+      title: 'ESA: AI Recent Example',
+      contentFile: 'esa-ai-case-01.md',
+      duration: 5,
       order: 6,
-      tags: ['case-study', 'navigation', 'complexity'],
-      relatedTopics: ['american-airlines']
+      tags: ['esa', 'ai', 'case-study'],
+      relatedTopics: ['shell', 'esa-ai-case-02']
     },
     {
-      id: 'american-airlines',
-      title: 'Case Study: American Airlines',
-      contentFile: 'american-airlines.md',
-      duration: 4,
+      id: 'esa-ai-case-02',
+      title: 'ESA: AI Other Use Cases',
+      contentFile: 'esa-ai-case-02.md',
+      duration: 5,
       order: 7,
-      tags: ['case-study', 'architecture', 'sev1'],
-      relatedTopics: ['gm', 'frit-boa']
+      tags: ['esa', 'ai', 'case-study'],
+      relatedTopics: ['esa-ai-case-01', 'esa-ai-case-03']
+    },
+    {
+      id: 'esa-ai-case-03',
+      title: 'ESA: AI Case 03',
+      contentFile: 'esa-ai-case-03.md',
+      duration: 5,
+      order: 8,
+      tags: ['esa', 'ai', 'case-study'],
+      relatedTopics: ['esa-ai-case-02']
     }
   ],
 
@@ -198,36 +207,6 @@ export const TOPICS_DATA: Record<ModuleId, Topic[]> = {
     }
   ],
 
-  'splunk-migration': [
-    {
-      id: 'migration-challenges',
-      title: 'Splunk Migration Challenges',
-      contentFile: 'migration-challenges.md',
-      duration: 6,
-      order: 1,
-      tags: ['splunk', 'migration', 'challenges'],
-      relatedTopics: ['conversion-complexity']
-    },
-    {
-      id: 'conversion-complexity',
-      title: 'SPL to DQL Conversion',
-      contentFile: 'conversion-complexity.md',
-      duration: 6,
-      order: 2,
-      tags: ['splunk', 'spl', 'dql'],
-      relatedTopics: ['manual-process']
-    },
-    {
-      id: 'manual-process',
-      title: 'Manual Migration Pain Points',
-      contentFile: 'manual-process.md',
-      duration: 5,
-      order: 3,
-      tags: ['splunk', 'manual', 'pain-points'],
-      relatedTopics: ['conversion-complexity']
-    }
-  ],
-
   'dynabridge-vision': [
     {
       id: 'dynabridge-splunk',
@@ -236,25 +215,34 @@ export const TOPICS_DATA: Record<ModuleId, Topic[]> = {
       duration: 8,
       order: 1,
       tags: ['splunk', 'dynabridge', 'automation'],
-      relatedTopics: ['platform-expansion', 'workflow-consistency']
+      relatedTopics: ['migration-challenges', 'platform-expansion']
+    },
+    {
+      id: 'migration-challenges',
+      title: 'Splunk Migration Challenges',
+      contentFile: 'migration-challenges.md',
+      duration: 6,
+      order: 2,
+      tags: ['splunk', 'migration', 'challenges', 'dynabridge'],
+      relatedTopics: ['dynabridge-splunk', 'platform-expansion']
     },
     {
       id: 'platform-expansion',
       title: 'Platform Expansion Strategy',
       contentFile: 'platform-expansion.md',
       duration: 5,
-      order: 2,
+      order: 3,
       tags: ['dynabridge', 'strategy', 'expansion'],
-      relatedTopics: ['dynabridge-splunk', 'workflow-consistency']
+      relatedTopics: ['migration-challenges', 'workflow-consistency']
     },
     {
       id: 'workflow-consistency',
       title: 'Workflow Consistency & Reusability',
       contentFile: 'workflow-consistency.md',
       duration: 5,
-      order: 3,
+      order: 4,
       tags: ['dynabridge', 'workflow', 'consistency'],
-      relatedTopics: ['dynabridge-splunk', 'platform-expansion']
+      relatedTopics: ['platform-expansion']
     }
   ],
 
@@ -288,7 +276,7 @@ export const TOPICS_DATA: Record<ModuleId, Topic[]> = {
     },
     {
       id: 'pulseboard',
-      title: 'CCO PulseBoard: Customer Signal Fabric',
+      title: 'CCO DynaPulse: Customer Signal Fabric',
       contentFile: 'pulseboard.md',
       duration: 5,
       order: 4,

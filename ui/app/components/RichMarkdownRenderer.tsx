@@ -321,16 +321,19 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
     '--theme-h1-padding': theme.styles.h1Padding,
     '--theme-h1-border-radius': theme.styles.h1BorderRadius,
     '--theme-h1-margin-bottom': theme.styles.h1MarginBottom,
+    '--theme-h1-box-shadow': theme.styles.h1BoxShadow || 'none',
     '--theme-h2-size': theme.styles.h2Size,
     '--theme-h2-weight': theme.styles.h2Weight,
     '--theme-h2-color': theme.styles.h2Color,
     '--theme-h2-border-bottom': theme.styles.h2BorderBottom,
     '--theme-h2-padding-bottom': theme.styles.h2PaddingBottom,
     '--theme-h2-margin-bottom': theme.styles.h2MarginBottom,
+    '--theme-h2-box-shadow': theme.styles.h2BoxShadow || 'none',
     '--theme-h3-size': theme.styles.h3Size,
     '--theme-h3-weight': theme.styles.h3Weight,
     '--theme-h3-color': theme.styles.h3Color,
     '--theme-h3-margin-bottom': theme.styles.h3MarginBottom,
+    '--theme-h3-box-shadow': theme.styles.h3BoxShadow || 'none',
     '--theme-paragraph-size': theme.styles.paragraphSize,
     '--theme-paragraph-line-height': theme.styles.paragraphLineHeight,
     '--theme-paragraph-margin-bottom': theme.styles.paragraphMarginBottom,
@@ -498,7 +501,8 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
                 padding: 'var(--theme-h1-padding, 0)',
                 borderRadius: 'var(--theme-h1-border-radius, 0)',
                 marginBottom: 'var(--theme-h1-margin-bottom, 16px)',
-                marginTop: '24px'
+                marginTop: '24px',
+                boxShadow: 'var(--theme-h1-box-shadow, none)'
               }}
               {...props}
             />
@@ -512,7 +516,8 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
                 borderBottom: 'var(--theme-h2-border-bottom, none)',
                 paddingBottom: 'var(--theme-h2-padding-bottom, 0)',
                 marginBottom: 'var(--theme-h2-margin-bottom, 12px)',
-                marginTop: '20px'
+                marginTop: '20px',
+                boxShadow: 'var(--theme-h2-box-shadow, none)'
               }}
               {...props}
             />
@@ -524,7 +529,8 @@ export const RichMarkdownRenderer: React.FC<RichMarkdownRendererProps> = ({
                 fontWeight: 'var(--theme-h3-weight, 600)' as any,
                 color: 'var(--theme-h3-color, #f0f0f5)',
                 marginBottom: 'var(--theme-h3-margin-bottom, 10px)',
-                marginTop: '16px'
+                marginTop: '16px',
+                boxShadow: 'var(--theme-h3-box-shadow, none)'
               }}
               {...props}
             />

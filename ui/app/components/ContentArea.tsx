@@ -9,6 +9,8 @@ import { TopicContent } from '../types/content';
 import { AdminContentUploader } from './AdminContentUploader';
 import { RichMarkdownRenderer } from './RichMarkdownRenderer';
 import { MarkdownTheme } from '../styles/markdownThemes';
+import { ThinkingStickFigure } from './ThinkingStickFigure';
+import { HeartMonitor } from './HeartMonitor';
 
 interface ContentAreaProps {
   content: TopicContent | null;
@@ -142,7 +144,9 @@ export const ContentArea: React.FC<ContentAreaProps> = ({
       style={{
         flex: 1,
         height: '100%',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        background: 'linear-gradient(135deg, #0a1542 0%, #1a1f4d 25%, #2d1b4e 50%, #3d1654 75%, #4a1a5c 100%)',
+        position: 'relative'
       }}
     >
       {/* Breadcrumb */}
@@ -151,14 +155,15 @@ export const ContentArea: React.FC<ContentAreaProps> = ({
         gap={8}
         style={{
           padding: '16px 48px',
-          background: 'rgba(37, 39, 61, 0.5)',
-          borderBottom: '1px solid rgba(108, 93, 211, 0.1)'
+          background: 'rgba(10, 21, 66, 0.3)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
         }}
       >
         <Text
           style={{
             fontSize: '12px',
-            color: 'rgba(180, 180, 190, 0.7)'
+            color: 'rgba(255, 255, 255, 0.6)',
+            letterSpacing: '0.5px'
           }}
         >
           {content.metadata.tags.join(' > ')}
@@ -221,6 +226,12 @@ export const ContentArea: React.FC<ContentAreaProps> = ({
             )}
           </>
         )}
+
+        {/* Thinking Stick Figure - only on AI Mindset topic */}
+        {currentTopicId === 'ai-mindset' && <ThinkingStickFigure />}
+
+        {/* Heart Monitor - only on CCO DynaPulse topic */}
+        {currentTopicId === 'pulseboard' && <HeartMonitor />}
 
         {/* Smart Topic Title - only show if content doesn't have a heading */}
         {shouldShowTopicTitle && (

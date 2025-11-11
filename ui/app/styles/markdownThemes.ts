@@ -3,7 +3,7 @@
  * Defines different styling themes for markdown content rendering
  */
 
-export type ThemeId = 'classic' | 'executive' | 'presentation' | 'technical' | 'academic';
+export type ThemeId = 'classic' | 'executive' | 'presentation' | 'technical' | 'academic' | 'cosmic';
 
 export interface MarkdownTheme {
   id: ThemeId;
@@ -18,6 +18,7 @@ export interface MarkdownTheme {
     h1Padding: string;
     h1BorderRadius: string;
     h1MarginBottom: string;
+    h1BoxShadow?: string;
 
     h2Size: string;
     h2Weight: string;
@@ -25,11 +26,13 @@ export interface MarkdownTheme {
     h2BorderBottom: string;
     h2PaddingBottom: string;
     h2MarginBottom: string;
+    h2BoxShadow?: string;
 
     h3Size: string;
     h3Weight: string;
     h3Color: string;
     h3MarginBottom: string;
+    h3BoxShadow?: string;
 
     // Body text
     paragraphSize: string;
@@ -127,6 +130,7 @@ export const MARKDOWN_THEMES: Record<ThemeId, MarkdownTheme> = {
       h1Padding: '12px 20px',
       h1BorderRadius: '8px',
       h1MarginBottom: '24px',
+      h1BoxShadow: '0 8px 16px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.4)',
 
       h2Size: '24px',
       h2Weight: '700',
@@ -134,11 +138,13 @@ export const MARKDOWN_THEMES: Record<ThemeId, MarkdownTheme> = {
       h2BorderBottom: '3px solid rgba(108, 93, 211, 0.6)',
       h2PaddingBottom: '10px',
       h2MarginBottom: '20px',
+      h2BoxShadow: '0 6px 12px rgba(0, 0, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.3)',
 
       h3Size: '18px',
       h3Weight: '600',
       h3Color: '#a99bff',
       h3MarginBottom: '14px',
+      h3BoxShadow: '0 4px 10px rgba(0, 0, 0, 0.45), 0 2px 5px rgba(0, 0, 0, 0.25)',
 
       paragraphSize: '16px',
       paragraphLineHeight: '1.7',
@@ -316,6 +322,57 @@ export const MARKDOWN_THEMES: Record<ThemeId, MarkdownTheme> = {
       tableBorder: '1px solid rgba(180, 180, 190, 0.3)',
       tableHeaderBackground: 'rgba(180, 180, 190, 0.15)',
       tableRowHoverBackground: 'rgba(180, 180, 190, 0.08)'
+    }
+  },
+
+  cosmic: {
+    id: 'cosmic',
+    name: 'Cosmic',
+    description: 'Space-inspired theme - clean white text on cosmic gradient',
+    styles: {
+      h1Size: '42px',
+      h1Weight: '300',
+      h1Color: '#ffffff',
+      h1Background: 'transparent',
+      h1Padding: '0',
+      h1BorderRadius: '0',
+      h1MarginBottom: '32px',
+
+      h2Size: '32px',
+      h2Weight: '400',
+      h2Color: '#ffffff',
+      h2BorderBottom: 'none',
+      h2PaddingBottom: '0',
+      h2MarginBottom: '24px',
+
+      h3Size: '24px',
+      h3Weight: '400',
+      h3Color: 'rgba(255, 255, 255, 0.95)',
+      h3MarginBottom: '16px',
+
+      paragraphSize: '17px',
+      paragraphLineHeight: '1.7',
+      paragraphMarginBottom: '18px',
+
+      codeBackground: 'rgba(0, 0, 0, 0.3)',
+      codeBorder: '1px solid rgba(255, 255, 255, 0.2)',
+      codePadding: '3px 8px',
+      codeBorderRadius: '4px',
+      codeBlockPadding: '20px',
+
+      listMarginLeft: '28px',
+      listItemMarginBottom: '12px',
+
+      blockquoteBackground: 'rgba(255, 255, 255, 0.05)',
+      blockquoteBorderLeft: '4px solid rgba(255, 255, 255, 0.3)',
+      blockquotePadding: '16px 20px',
+
+      linkColor: '#b8a3ff',
+      linkHoverColor: '#d4c5ff',
+
+      tableBorder: '1px solid rgba(255, 255, 255, 0.2)',
+      tableHeaderBackground: 'rgba(255, 255, 255, 0.1)',
+      tableRowHoverBackground: 'rgba(255, 255, 255, 0.05)'
     }
   }
 };

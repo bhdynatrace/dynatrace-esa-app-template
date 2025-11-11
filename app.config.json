@@ -3,7 +3,7 @@
   "app": {
   "id": "my.d1esa.dynatrace.deepdive",
     "name": "D1 Leadership AI Deep Dive",
-  "version": "2.1.1",
+  "version": "2.30.0",
     "description": "D1 - AI Deep Dive Presentation App",
     "scopes": [
       {
@@ -37,6 +37,14 @@
       {
         "name": "app-settings:objects:write",
         "comment": "Write app settings"
+      },
+      {
+        "name": "document:documents:read",
+        "comment": "Read documents for persistent content storage"
+      },
+      {
+        "name": "document:documents:write",
+        "comment": "Write documents for persistent content storage"
       }
     ],
   "icon": "src/assets/app_icon.png",

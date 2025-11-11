@@ -8,7 +8,6 @@ export type ModuleId =
   | 'challenges'
   | 'ai-crash-course'
   | 'app-demo'
-  | 'splunk-migration'
   | 'dynabridge-vision'
   | 'blueprint'
   | 'qa';

@@ -10,7 +10,7 @@ export const MODULES: Module[] = [
     id: 'architectures',
     title: 'Platforms & Challenges',
     description: 'Overview of Dynatrace platform deployment models and challenges',
-    duration: 20,
+    duration: 10,
     order: 1,
     icon: 'architecture',
     color: '#6c5dd3'
@@ -19,7 +19,7 @@ export const MODULES: Module[] = [
     id: 'challenges',
     title: 'Service Challenges',
     description: 'Real-world case studies and service gaps',
-    duration: 25,
+    duration: 10,
     order: 2,
     icon: 'alert',
     color: '#ee3d48'
@@ -37,26 +37,17 @@ export const MODULES: Module[] = [
     id: 'app-demo',
     title: 'App Building Demo',
     description: 'Template overview and Volumetric Explorer case study',
-    duration: 15,
+    duration: 20,
     order: 4,
     icon: 'dashboard',
     color: '#32c832'
   },
   {
-    id: 'splunk-migration',
-    title: 'Splunk Migration',
-    description: 'Deep dive into Splunk to Dynatrace migration challenges',
-    duration: 17,
-    order: 5,
-    icon: 'transfer',
-    color: '#ffc800'
-  },
-  {
     id: 'dynabridge-vision',
     title: 'DynaBridge Vision',
-    description: 'DynaBridge for Splunk, platform expansion, and workflow consistency',
-    duration: 18,
-    order: 6,
+    description: 'DynaBridge for Splunk, migration challenges, platform expansion, and workflow consistency',
+    duration: 24,
+    order: 5,
     icon: 'bridge',
     color: '#d946ef'
   },
@@ -64,8 +55,8 @@ export const MODULES: Module[] = [
     id: 'blueprint',
     title: 'Vision',
     description: 'Customer Solutions & AI Engineering organization vision',
-    duration: 20,
-    order: 7,
+    duration: 13,
+    order: 6,
     icon: 'blueprint',
     color: '#3b82f6'
   },
@@ -73,8 +64,8 @@ export const MODULES: Module[] = [
     id: 'qa',
     title: 'Q&A',
     description: 'Open forum and discussion',
-    duration: 15,
-    order: 8,
+    duration: 5,
+    order: 7,
     icon: 'question',
     color: '#8b5cf6'
   }

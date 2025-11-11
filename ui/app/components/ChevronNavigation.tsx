@@ -37,18 +37,20 @@ const ChevronStep: React.FC<ChevronStepProps> = ({
       return {
         background: 'linear-gradient(135deg, var(--dt-colors-accent-primary-default, #6c5dd3), #5848b3)',
         border: '2px solid var(--dt-colors-accent-primary-default, #6c5dd3)',
-        boxShadow: '0 4px 16px rgba(108, 93, 211, 0.4)'
+        boxShadow: '0 6px 20px rgba(108, 93, 211, 0.6), 0 3px 10px rgba(108, 93, 211, 0.4)'
       };
     }
     if (isCompleted) {
       return {
         background: 'rgba(50, 200, 50, 0.1)',
-        border: '1px solid rgba(50, 200, 50, 0.5)'
+        border: '1px solid rgba(50, 200, 50, 0.5)',
+        boxShadow: '0 5px 18px rgba(50, 200, 50, 0.4), 0 2px 8px rgba(50, 200, 50, 0.3)'
       };
     }
     return {
       background: 'rgba(45, 48, 73, 0.5)',
-      border: '1px solid rgba(108, 93, 211, 0.2)'
+      border: '1px solid rgba(108, 93, 211, 0.2)',
+      boxShadow: '0 4px 14px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3)'
     };
   };
 
